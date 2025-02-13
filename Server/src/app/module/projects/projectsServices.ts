@@ -13,15 +13,15 @@ const createProject = async (payload: projectsInterface) => {
 // get all products 
 const getProjects = async (query: Record<string, unknown>) => {
     const searchableFields = ['description', 'title'];
-    const productQuery = new QuiryBuilder(projectsModel.find(), query)
+    const projectQuery = new QuiryBuilder(projectsModel.find(), query)
         .search(searchableFields)
         .filter()
         .sort()
         .paginate()
         .fields();
 
-    const result = await productQuery.modelQuery;
-    const meta = await productQuery.countTotal();
+    const result = await projectQuery.modelQuery;
+    const meta = await projectQuery.countTotal();
     
     return {
         meta,

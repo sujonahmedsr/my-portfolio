@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { productController } from "./projectsController";
+import { ProjectsController } from "./projectsController";
 
 const projectsRouter = Router()
 
-projectsRouter.post('/create', productController.createConProduct)
-projectsRouter.get('/',  productController.getConProduct)
-projectsRouter.get('/:id',  productController.getSingleConProduct)
-projectsRouter.patch('/:id',  productController.updateSingleConProduct)
-projectsRouter.delete('/:id',   productController.deleteSingleConProduct)
+projectsRouter.post('/create', ProjectsController.createConProjects)
+projectsRouter.get('/',  ProjectsController.getConProjects)
+projectsRouter.get('/:id',  ProjectsController.getSingleConProjects)
+projectsRouter.patch('/:id',  ProjectsController.updateSingleConProjects)
+projectsRouter.delete('/:id',   ProjectsController.deleteSingleConProjects)
 
 export default projectsRouter

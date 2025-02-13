@@ -1,70 +1,70 @@
 import { Request, Response } from "express";
-import { productServices } from "./projectsServices";
 import asyncFunc from "../../utils/asyncFunc";
 import sendResponse from "../../utils/sendRespose";
 import { StatusCodes } from "http-status-codes";
+import { projectsServices } from "./projectsServices";
 
-// create bycle product 
-const createConProduct = asyncFunc(async (req, res) => {
+// create bycle Projects 
+const createConProjects = asyncFunc(async (req, res) => {
     const body = req.body;
-    const result = await productServices.createProduct(body)
+    const result = await projectsServices.createProject(body)
     sendResponse(res, {
         statusCode: StatusCodes.CREATED,
-        message: 'Bi_Cycle created successfully',
+        message: 'Project created successfully',
         data: result
     })
 })
 
-// get all bycles product 
-const getConProduct = asyncFunc(async (req, res) => {
+// get all bycles Projects 
+const getConProjects = asyncFunc(async (req, res) => {
     const queryData = req?.query;
-    const result = await productServices.getProducts(queryData)
+    const result = await projectsServices.getProjects(queryData)
     sendResponse(res, {
         statusCode: StatusCodes.OK,
-        message: 'Bicycles retrieved successfully',
+        message: 'Projects retrieved successfully',
         data: result,
     })
 })
 
 
-// get single bycle product 
-const getSingleConProduct = asyncFunc(async (req, res) => {
+// get single bycle Projects 
+const getSingleConProjects = asyncFunc(async (req, res) => {
     const id = req.params.id
-    const result = await productServices.getSingleProducts(id)
+    const result = await projectsServices.getSingleProjects(id)
     sendResponse(res, {
         statusCode: StatusCodes.OK,
-        message: 'Bicycle retrieved successfully',
+        message: 'Project retrieved successfully',
         data: result
     })
 })
 
-// update single bycle product 
-const updateSingleConProduct = asyncFunc(async (req, res) => {
+// update single bycle Projects 
+const updateSingleConProjects = asyncFunc(async (req, res) => {
     const body = req.body
     const id = req.params.id
-    const result = await productServices.updateSingleProducts(id, body)
+    const result = await projectsServices.updateSingleProjects(id, body)
     sendResponse(res, {
         statusCode: StatusCodes.OK,
-        message: 'Bicycle updated successfully',
+        message: 'Project updated successfully',
         data: result
     })
 })
 
 // delete single bycle 
-const deleteSingleConProduct = asyncFunc(async (req, res) => {
+const deleteSingleConProjects = asyncFunc(async (req, res) => {
     const id = req.params.id
-    await productServices.deleteSingleProducts(id)
+    await projectsServices.deleteSingleProjects(id)
     sendResponse(res, {
         statusCode: StatusCodes.OK,
-        message: 'Bicycle deleted successfully',
+        message: 'Project deleted successfully',
         data: null
     })
 })
 
-export const productController = {
-    createConProduct,
-    getConProduct,
-    getSingleConProduct,
-    updateSingleConProduct,
-    deleteSingleConProduct
+export const ProjectsController = {
+    createConProjects,
+    getConProjects,
+    getSingleConProjects,
+    updateSingleConProjects,
+    deleteSingleConProjects
 }
