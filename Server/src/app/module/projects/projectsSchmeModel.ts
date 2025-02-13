@@ -15,6 +15,14 @@ const projectsSchema = new Schema<projectsInterface>({
         type: String,
         required: [true, 'Description field is required']
     },
+    githubLink: {
+        type: String,
+        required: [true, 'githubLink field is required']
+    },
+    technologies: {
+        type: String,
+        required: [true, 'technologies field is required']
+    },
 
 }, { timestamps: true, versionKey: false })
 
