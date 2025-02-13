@@ -1,19 +1,19 @@
 import { StatusCodes } from "http-status-codes";
 import AppError from "../../errors/AppError";
-import { productInterface } from "./projectsInterface";
-import { productModel } from "./projectsSchmeModel";
 import QuiryBuilder from "../../QuiryBuilder/QuiryBuilder";
+import { projectsInterface } from "./projectsInterface";
+import { projectsModel } from "./projectsSchmeModel";
 
 
 // create post 
-const createProduct = async (payload: productInterface) => {
-    const result = await productModel.create(payload)
+const createProject = async (payload: projectsInterface) => {
+    const result = await projectsModel.create(payload)
     return result
 }
 // get all products 
-const getProducts = async (query: Record<string, unknown>) => {
-    const searchableFields = ['description', 'type', 'brand', 'name'];
-    const productQuery = new QuiryBuilder(productModel.find(), query)
+const getProjects = async (query: Record<string, unknown>) => {
+    const searchableFields = ['description', 'title'];
+    const productQuery = new QuiryBuilder(projectsModel.find(), query)
         .search(searchableFields)
         .filter()
         .sort()
@@ -30,35 +30,35 @@ const getProducts = async (query: Record<string, unknown>) => {
 
 }
 // get single product 
-const getSingleProducts = async (id: string) => {
+const getSingleProjects = async (id: string) => {
 
-    const result = await productModel.findById(id)
+    const result = await projectsModel.findById(id)
     if (!result) {
-        throw new AppError(StatusCodes.NOT_FOUND, 'This product is not found !')
+        throw new AppError(StatusCodes.NOT_FOUND, 'This projects is not found !')
     }
     return result
 }
-// update single product 
-const updateSingleProducts = async (id: string, body: productInterface) => {
-    const result = await productModel.findByIdAndUpdate(id, body, { new: true })
+// update single projects 
+const updateSingleProjects = async (id: string, body: projectsInterface) => {
+    const result = await projectsModel.findByIdAndUpdate(id, body, { new: true })
     if (!result) {
-        throw new AppError(StatusCodes.NOT_FOUND, 'This product is not found !')
+        throw new AppError(StatusCodes.NOT_FOUND, 'This projects is not found !')
     }
     return result
 }
-// delete single product 
-const deleteSingleProducts = async (id: string) => {
-    const result = await productModel.findByIdAndDelete(id)
+// delete single projects 
+const deleteSingleProjects = async (id: string) => {
+    const result = await projectsModel.findByIdAndDelete(id)
     if (!result) {
-        throw new AppError(StatusCodes.NOT_FOUND, 'This product is not found !')
+        throw new AppError(StatusCodes.NOT_FOUND, 'This projects is not found !')
     }
     return result
 }
 
-export const productServices = {
-    createProduct,
-    getProducts,
-    getSingleProducts,
-    updateSingleProducts,
-    deleteSingleProducts
+export const projectsServices = {
+    createProject,
+    getProjects,
+    getSingleProjects,
+    updateSingleProjects,
+    deleteSingleProjects
 }
