@@ -4,6 +4,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt, FaFacebook, FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
 import { SiTailwindcss, SiMongodb, SiRedux, SiNextdotjs, SiTypescript, SiMysql, SiPrisma } from "react-icons/si";
 import { BiLogoMongodb, BiLogoPostgresql } from "react-icons/bi";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Me",
+  description: "Learn more about me, my journey in web development, skills, and passion for technology. Discover how I create innovative solutions through code!",
+};
+
+
+
 export default function AboutMe() {
   return (
     <section className="bg-gray-100 dark:bg-gray-900 py-16 px-6 md:px-12 lg:px-20 transition-all">

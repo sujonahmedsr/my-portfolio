@@ -3,6 +3,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaAddressCard } from "react-icons/fa6";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact With Me",
+  description: "Get in touch with me for collaborations, project inquiries, or just to say hello. I'm always open to new opportunities and discussions!",
+};
+
 
 const ContactPage = () => {
   return (
@@ -21,13 +31,13 @@ const ContactPage = () => {
             <div className="mt-6">
               <h3 className="text-2xl font-semibold ">Contact Info</h3>
               <ul className="mt-4 space-y-2">
-                <li><span className="font-bold">Phone: </span> 01798769363</li>
-                <li><span className="font-bold">Email: </span>
+                <li className="flex items-center gap-2"><FaPhoneAlt /> <span className="font-bold">Phone: </span> 01798769363</li>
+                <li className="flex items-center gap-2"><MdEmail /> <span className="font-bold">Email: </span>
                   <a href="mailto:shofiqul.sujon2021@gmail.com" className="underline">
                     shofiqul.sujon2021@gmail.com
                   </a>
                 </li>
-                <li><span className="font-bold">Address: </span> Sirajganj, Sirajganj Sadar, Bangladesh</li>
+                <li className="flex items-center gap-2"><FaAddressCard /> <span className="font-bold">Address: </span> Sirajganj, Sirajganj Sadar, Bangladesh</li>
               </ul>
             </div>
 

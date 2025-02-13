@@ -1,5 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"; // Assuming shadcn card component path
 import Image from "next/image";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Dashboard | Messages",
+    description: "Explore my portfolio of projects, showcasing my expertise in web development. From front-end designs to full-stack applications, see what I've built!",
+  };
 
 const messages = [
     {

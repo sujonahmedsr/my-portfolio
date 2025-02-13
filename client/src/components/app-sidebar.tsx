@@ -1,3 +1,4 @@
+"use client"
 import { CirclePower, Home } from "lucide-react"
 
 import {
@@ -10,6 +11,7 @@ import {
 } from "@/components/ui/sidebar"
 import { FaEnvelope, FaProjectDiagram, FaRegNewspaper } from "react-icons/fa"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 // Menu items.
 const items = [
@@ -36,6 +38,7 @@ const items = [
 ]
 
 export function AppSidebar() {
+  const location = usePathname()
   return (
     <Sidebar>
       <SidebarContent>
@@ -53,7 +56,7 @@ export function AppSidebar() {
               {items.map((item) => (
                 <div className="mt-2" key={item.title}>
                   {/* <SidebarMenuButton asChild> */}
-                    <Link href={item.url} className="flex items-center hover:bg-blue-500 gap-2 p-2">
+                    <Link href={item.url} className={`flex items-center hover:bg-blue-500 ${location === item.url ? "bg-blue-600 text-white" : ""} gap-2 p-2`}>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
