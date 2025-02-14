@@ -7,7 +7,7 @@ import profile from "@/assets/profile.jpg"
 export default function HeroPage() {
   return (
     <section id="home" className="bg-gray-100 dark:bg-gray-900 min-h-[90vh] flex items-center justify-center py-10 px-4">
-      <div className="container mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center px-4">
+      <div className="container mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-4">
 
         {/* Left Side - Text Section */}
         <div className="text-center md:text-left">

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
@@ -37,25 +37,27 @@ const blogs = [
   }
 ];
 const BlogsPage = () => {
-    return (
-        <div className="bg-gray-100 text-center py-10 dark:bg-gray-900 dark:text-white">
+  return (
+    <div className="bg-gray-100 py-10 dark:bg-gray-900 dark:text-white">
       <h2 className="text-4xl font-bold text-center mb-6">Latest Blogs</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 container mx-auto">
         {blogs.map((blog) => (
           <Card key={blog.id} className="overflow-hidden bg-white p-4 rounded-2xl shadow-lg hover:shadow-2xl transition-all dark:bg-gray-800">
-            <Image src={blog.image} alt={blog.title} width={500} height={500} className="w-full h-48 object-cover" />
-            <CardContent className="p-4">
+            <Image src={blog.image} alt={blog.title} width={500} height={500} className="w-full h-64 object-cover" />
+            <div className="p-4">
               <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
               <p className="text-gray-600 text-sm mb-4 dark:text-gray-300">{blog.description}</p>
-              <Link href={`/blogs/${blog.id}`} className="text-blue-600 hover:text-blue-700 font-medium dark:text-blue-400 dark:hover:text-blue-500">
-                Read More →
-              </Link>
-            </CardContent>
+              <div className="text-center">
+                <Link href={`/blogs/${blog.id}`} className="text-blue-600 hover:text-blue-700 font-medium dark:text-blue-400 dark:hover:text-blue-500 mx-auto">
+                  Read More →
+                </Link>
+              </div>
+            </div>
           </Card>
         ))}
       </div>
     </div>
-    );
+  );
 };
 
 export default BlogsPage;
