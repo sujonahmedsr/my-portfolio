@@ -5,7 +5,7 @@ import { projectsInterface } from "./projectsInterface";
 const projectsSchema = new Schema<projectsInterface>({
     title: {
         type: String,
-        required: [true, 'Name field is required']
+        required: [true, 'title field is required']
     },
     image: {
         type: String,
