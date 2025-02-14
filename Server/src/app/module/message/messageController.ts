@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import asyncFunc from "../../utils/asyncFunc";
 import sendResponse from "../../utils/sendRespose";
-import { messageServices } from "./MessageServices";
+import { messageServices } from "./messageServices";
 
 const createMassage = asyncFunc(async(req, res) => {
     const body = req.body
