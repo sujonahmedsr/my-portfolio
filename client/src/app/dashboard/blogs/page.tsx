@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 const DBlogsPage = () => {
     return (
-        <div>
+        <div className="p-4">
             DBlogs Page
         </div>
     );

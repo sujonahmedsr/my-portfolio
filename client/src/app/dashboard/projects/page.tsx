@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 const DProjectPage = () => {
     return (
-        <div>
+        <div className='p-4'>
             DProject Page
         </div>
     );

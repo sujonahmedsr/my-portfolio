@@ -57,7 +57,7 @@ export function AppSidebar() {
                 <div className="mt-2" key={item.title}>
                   {/* <SidebarMenuButton asChild> */}
                     <Link href={item.url} className={`flex items-center hover:bg-blue-500 ${location === item.url ? "bg-blue-600 text-white" : ""} gap-2 p-2`}>
-                      <item.icon />
+                      <item.icon className="text-2xl"/>
                       <span>{item.title}</span>
                     </Link>
                   {/* </SidebarMenuButton> */}

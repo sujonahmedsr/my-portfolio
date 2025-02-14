@@ -4,6 +4,7 @@ import { SiTailwindcss, SiMongodb, SiRedux, SiNextdotjs, SiTypescript } from "re
 import { BiLogoMongodb } from "react-icons/bi";
 import profile from "@/assets/profile.jpg"
 
+
 export default function HeroPage() {
   return (
     <section id="home" className="bg-gray-100 dark:bg-gray-900 min-h-[90vh] flex items-center justify-center py-10 px-4">
@@ -34,7 +35,7 @@ export default function HeroPage() {
 
           {/* Call to Action */}
           <div className="mt-6 flex items-center md:justify-start justify-center gap-5">
-            <a href="/contact" className="inline-block px-6 py-2 bg-blue-600 text-white font-semibold rounded shadow hover:bg-blue-700 transition">
+            <a href="/resume.pdf" download={"Shofiqul Islam Resume (MERN)"} className="inline-block px-6 py-2 bg-blue-600 text-white font-semibold rounded shadow hover:bg-blue-700 transition">
               Resume
             </a>
             {/* Social Media Links */}

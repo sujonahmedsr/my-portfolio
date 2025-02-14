@@ -28,7 +28,7 @@ const BlogDetails = async ({ params }: { params: any }) => {
     }
 
     return (
-        <section className='bg-gray-100 py-10 dark:bg-gray-900 dark:text-white'>
+        <section className='bg-gray-100 py-10 px-4 dark:bg-gray-900 dark:text-white'>
             <div className="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg dark:bg-gray-800 border">
                 <Image
                     src={blog.image}
