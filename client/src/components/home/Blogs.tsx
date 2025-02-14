@@ -31,8 +31,8 @@ const BlogSection = () => {
       <h2 className="text-2xl font-bold text-center mb-6">Latest Blogs</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 container mx-auto">
         {blogs.map((blog) => (
-          <Card key={blog.id} className="overflow-hidden bg-white p-4 rounded-2xl shadow-lg hover:shadow-2xl transition-all dark:bg-gray-800">
-            <Image src={blog.image} alt={blog.title} width={500} height={500} className="w-full h-48 object-cover" />
+          <Card key={blog.id} className="overflow-hidden bg-white p-4 rounded shadow-lg hover:shadow-2xl transition-all dark:bg-gray-800">
+            <Image src={blog.image} alt={blog.title} width={500} height={500} className="w-full h-64 object-cover" />
             <CardContent className="p-4">
               <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
               <p className="text-gray-600 text-sm mb-4 dark:text-gray-300">{blog.description}</p>

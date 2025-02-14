@@ -7,10 +7,10 @@ import profile from "@/assets/profile.jpg"
 export default function HeroPage() {
   return (
     <section id="home" className="bg-gray-100 dark:bg-gray-900 min-h-[90vh] flex items-center justify-center py-10 px-4">
-      <div className="container mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-4">
+      <div className="container mx-auto w-full md:grid flex flex-col-reverse grid-cols-1 lg:grid-cols-2 gap-8 items-center px-4">
 
         {/* Left Side - Text Section */}
-        <div className="text-center md:text-left">
+        <div className="text-left">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
             Hi, I&apos;m <br /> <p className="text-blue-600 dark:text-blue-400 mt-5">Shofiqul Islam Sujon</p>
           </h1>
