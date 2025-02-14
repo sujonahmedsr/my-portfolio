@@ -1,13 +1,11 @@
 import React from "react";
 import { Metadata } from "next";
-import Cards from "@/components/projects/Cards";
+import Cards from "@/components/sharedComponents/Cards";
 
 export const metadata: Metadata = {
     title: "My Projects",
     description: "Explore my portfolio of projects, showcasing my expertise in web development. From front-end designs to full-stack applications, see what I've built!",
 };
-
-
 
 const projects = [
     {

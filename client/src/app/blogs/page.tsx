@@ -48,7 +48,7 @@ const BlogsPage = () => {
               <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
               <p className="text-gray-600 text-sm mb-4 dark:text-gray-300">{blog.description}</p>
               <div className="text-center">
-                <Link href={`/blogs/${blog.id}`} className="text-blue-600 hover:text-blue-700 font-medium dark:text-blue-400 dark:hover:text-blue-500 mx-auto">
+                <Link href={`/blogs/${blog?.id}`} className="text-blue-600 hover:text-blue-700 font-medium dark:text-blue-400 dark:hover:text-blue-500 mx-auto">
                   Read More →
                 </Link>
               </div>

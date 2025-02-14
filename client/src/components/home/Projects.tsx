@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
 import { Card } from "@/components/ui/card";
-import Cards, { TProject } from "../projects/Cards";
+import Cards, { TProject } from "../sharedComponents/Cards";
 
 const projects: TProject[] = [
     {
