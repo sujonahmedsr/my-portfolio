@@ -3,35 +3,11 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Card } from "@/components/ui/card";
 import ProjectsCard, { TProject } from "../ForProjects/ProjectsCard";
+import axios from "axios";
 
-const projects: TProject[] = [
-    {
-        id: '1',
-        title: "Cycle Labs",
-        description: "A full-stack bicycle store application with authentication, payment integration, and product management.",
-        image: "https://img.freepik.com/premium-vector/project-management-marketing-analysis-development-online-successful-strategy-motivation_501813-2156.jpg",
-        liveLink: "#",
-        githubLink: "#",
-    },
-    {
-        id: '2',
-        title: "Coaching Center Management",
-        description: "A web app for managing student records, attendance, and online classes.",
-        image: "https://img.freepik.com/premium-vector/project-management-marketing-analysis-development-online-successful-strategy-motivation_501813-2156.jpg",
-        liveLink: "#",
-        githubLink: "#",
-    },
-    {
-        id: '3',
-        title: "Time Management App",
-        description: "A productivity tool to track and manage tasks efficiently.",
-        image: "https://img.freepik.com/premium-vector/project-management-marketing-analysis-development-online-successful-strategy-motivation_501813-2156.jpg",
-        liveLink: "#",
-        githubLink: "#",
-    }
-];
-
-const Projects = () => {
+const Projects = async () => {
+    const res = await axios.get(`http://localhost:5000/api/projects`)
+    const projects = res?.data?.data?.result
     return (
         <>
             <section className="bg-gray-100 text-center py-10 dark:bg-gray-900 dark:text-white transition-all">
@@ -45,7 +21,7 @@ const Projects = () => {
                 </div>
                 <h2 className="text-2xl font-bold text-center my-6">My Projects</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 container mx-auto">
-                    {projects.map((project, index) => (
+                    {projects?.slice(0, 3)?.map((project: TProject, index: number) => (
                         <ProjectsCard key={index} project={project} />
                     ))}
                 </div>
