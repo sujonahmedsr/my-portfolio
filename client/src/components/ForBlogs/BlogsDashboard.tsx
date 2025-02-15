@@ -1,5 +1,3 @@
-import { Trash2 } from "lucide-react";
-import { Button } from "../ui/button";
 import AddBlog from "./AddBlog";
 import Image from "next/image";
 import UpdateBlog from "./UpdateBlog";
@@ -9,7 +7,7 @@ import { TBlog } from "./BlogsCard";
 export default async function BlogsDashboard() {
   const res = await axios.get(`http://localhost:5000/api/blogs`)
   const blogs = res?.data?.data?.result
-  
+
   return (
     <div className="container mx-auto p-6">
       <div className="flex justify-between items-center mb-4">
@@ -40,7 +38,6 @@ export default async function BlogsDashboard() {
                 
                 <td className="border p-2 flex items-center mx-auto justify-center gap-2">
                   <UpdateBlog blog={blog}/>
-                  <Button variant={"outline"}  className="text-red-600"><Trash2 size={18} /></Button>
                 </td>
               </tr>
             ))}

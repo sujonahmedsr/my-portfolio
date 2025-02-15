@@ -72,10 +72,8 @@ const AddProject = () => {
                 ...data,
                 image: imageUrl
             }
-            console.log("from prject data",projectData);
             
             const res = await axios.post(`http://localhost:5000/api/projects/create`,projectData)
-            console.log(res, "from res");
             
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })

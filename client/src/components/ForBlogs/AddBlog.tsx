@@ -69,7 +69,6 @@ const AddBlog = () => {
                 image: imageUrl
             }
             const res = await axios.post(`http://localhost:5000/api/blogs/create`,blogData)
-            console.log("blog create",res);
             
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })

@@ -1,11 +1,10 @@
-import { Trash2 } from "lucide-react";
-import { Button } from "../ui/button";
 import AddBlog from "./AddProject";
 import Image from "next/image";
 import UpdateBlog from "./UpdateProject";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import axios from "axios";
 import { TProject } from "./ProjectsCard";
+import profile from "@/assets/profile.jpg"
 
 export default async function ProjectsDashboard() {
   const res = await axios.get(`http://localhost:5000/api/projects`)
@@ -35,7 +34,7 @@ export default async function ProjectsDashboard() {
             {projects.map((project: TProject) => (
               <tr key={project._id} className="hover:bg-gray-100 hover:dark:bg-gray-800">
                 <td className="border p-2">
-                  <Image src={project.image} width={50} height={50} alt={project.title} />
+                  <Image src={project.image === "" ? profile : project.image} width={50} height={50} alt={project.title} />
                 </td>
                 <td className="border p-2">{project.title}</td>
                 <td className="border p-2"><a
@@ -70,7 +69,6 @@ export default async function ProjectsDashboard() {
 
                 <td className="border p-2 flex items-center mx-auto justify-center gap-2">
                   <UpdateBlog project={project} />
-                  <Button variant={"outline"} className="text-red-600"><Trash2 size={18} /></Button>
                 </td>
               </tr>
             ))}

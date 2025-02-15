@@ -26,7 +26,7 @@ import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import axios from "axios"
 import Image from "next/image";
-import { Pencil } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { TProject } from "./ProjectsCard"
 const formSchema = z.object({
     title: z.string({ required_error: "title is required." }).optional(),
@@ -107,6 +107,9 @@ const UpdateProject = ({ project }: { project: TProject }) => {
             toast.error('Failed to Update Project. Please try again.')
         }
     }
+    const handleDelete = async (id: string) => {
+        await axios.delete(`http://localhost:5000/api/projects/${id}`)
+    }
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
@@ -114,6 +117,7 @@ const UpdateProject = ({ project }: { project: TProject }) => {
                     <Button variant={"outline"} className="text-green-600"><Pencil size={18} /></Button>
                 </div>
             </DialogTrigger>
+            <Button onClick={() => handleDelete(project?._id)} variant={"outline"} className="text-red-600"><Trash2 size={18} /></Button>
             <DialogContent aria-describedby={undefined}>
                 <DialogTitle className="sr-only">Add Project</DialogTitle>
                 <Form {...form}>
