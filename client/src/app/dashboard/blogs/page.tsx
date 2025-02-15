@@ -1,16 +1,11 @@
-import { Metadata } from "next";
+import BlogsDashboard from "@/components/ForBlogs/BlogsDashboard";
 
-export const metadata: Metadata = {
-    title: "Dashboard | My Blogs",
-    description: "Explore my latest blogs on web development, programming, and tech trends. Stay updated with insights, tutorials, and coding tips!",
+const page = () => {
+  return (
+    <div>
+      <BlogsDashboard />
+    </div>
+  );
 };
 
-const DBlogsPage = () => {
-    return (
-        <div className="p-4">
-            DBlogs Page
-        </div>
-    );
-};
-
-export default DBlogsPage;
+export default page;

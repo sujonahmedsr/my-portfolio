@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function AboutMe() {
   return (
     <section className="bg-gray-100 dark:bg-gray-900 py-16 px-6 md:px-12 lg:px-20 transition-all">
-      <div className="max-w-5xl mx-auto">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-between gap-8 mx-auto px-4">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">

@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
 import { Card } from "@/components/ui/card";
-import Cards, { TProject } from "../sharedComponents/Cards";
+import ProjectsCard, { TProject } from "../ForProjects/ProjectsCard";
 
 const projects: TProject[] = [
     {
@@ -46,7 +46,7 @@ const Projects = () => {
                 <h2 className="text-2xl font-bold text-center my-6">My Projects</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 container mx-auto">
                     {projects.map((project, index) => (
-                        <Cards key={index} project={project} />
+                        <ProjectsCard key={index} project={project} />
                     ))}
                 </div>
                 <div className="flex justify-center mt-6">

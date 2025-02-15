@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import Cards from "@/components/sharedComponents/Cards";
+import ProjectsCard from "@/components/ForProjects/ProjectsCard";
 
 export const metadata: Metadata = {
     title: "My Projects",
@@ -48,7 +48,7 @@ const ProjectsPage = () => {
             <h2 className="text-4xl font-bold text-center mb-6">My Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 container mx-auto">
                 {projects.map((project, index) => (
-                    <Cards key={index} project={project} />
+                    <ProjectsCard key={index} project={project} />
                 ))}
             </div>
         </section>
