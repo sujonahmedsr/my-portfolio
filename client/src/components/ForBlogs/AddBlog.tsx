@@ -71,7 +71,7 @@ const AddBlog = () => {
             const res = await axios.post(`http://localhost:5000/api/blogs/create`,blogData)
             console.log("blog create",res);
             
-            if (res?.error) {
+            if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
                 toast.success("Product Added Successfull...", { id: toastId })

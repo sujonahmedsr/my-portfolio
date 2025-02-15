@@ -91,7 +91,7 @@ const UpdateBlog = ({ blog }: { blog: TBlog }) => {
                 image: imageUrl
             }
             const res = await axios.patch(`http://localhost:5000/api/blogs/${blog?._id}`, blogData)
-            if (res?.error) {
+            if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
                 toast.success("Product Added Successfull...", { id: toastId })
