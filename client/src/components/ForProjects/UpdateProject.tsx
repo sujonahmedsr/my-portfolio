@@ -1,3 +1,4 @@
+"use client"
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
@@ -21,23 +22,33 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import axios from "axios"
 import Image from "next/image";
 import { Pencil } from "lucide-react";
+import { TProject } from "./ProjectsCard"
 const formSchema = z.object({
     title: z.string({ required_error: "title is required." }).optional(),
     image: z.string().optional(),
     description: z.string({ required_error: "description is required." }).optional(),
     liveLink: z.string({ required_error: "liveLink is required." }).optional(),
     githubLink: z.string({ required_error: "githubLink is required." }).optional(),
+    technologies: z.string({ required_error: "technologies is required." }).optional(),
 });
-const UpdateProject = () => {
+const UpdateProject = ({ project }: { project: TProject }) => {
     const addProject = {}
     const [open, setOpen] = useState(false)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        defaultValues: {
+            title: "",
+            image: "",
+            description: "",
+            liveLink: "",
+            githubLink: "",
+            technologies: ""
+        }
     })
 
     // image upload to coudinary start 
@@ -50,37 +61,50 @@ const UpdateProject = () => {
 
     const { reset } = form
 
+    useEffect(() => {
+        reset({
+            title: project?.title || "",
+            image: project?.image || "",
+            description: project?.description || "",
+            liveLink: project?.liveLink || "",
+            githubLink: project?.githubLink || "",
+            technologies: project?.technologies || ""
+        });
+    }, [project, reset]);
+
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Loading...")
         try {
-            if (!image) return toast.error("Please select an image first!");
 
-            const formData = new FormData();
-            formData.append("file", image);
-            formData.append("upload_preset", "cycle_labs"); // Replace with your Cloudinary preset
+            let imageUrl = data?.image
+            if (image) {
+                const formData = new FormData();
+                formData.append("file", image);
+                formData.append("upload_preset", "cycle_labs"); // Replace with your Cloudinary preset
 
-            const response = await axios.post(
-                "https://api.cloudinary.com/v1_1/dvjeaplel/image/upload", // Replace with your Cloudinary cloud name
-                formData
-            );
+                const response = await axios.post(
+                    "https://api.cloudinary.com/v1_1/dvjeaplel/image/upload", // Replace with your Cloudinary cloud name
+                    formData
+                );
 
-            // cloudirnay img url 
-            const imageUrl = response.data.secure_url
+                // cloudirnay img url 
+                imageUrl = response.data.secure_url
+            }
 
             const ProjectData = {
                 ...data,
                 image: imageUrl
             }
-            const res = await addProject(ProjectData)
-            if (res?.error) {
+            const res = await axios.patch(`http://localhost:5000/api/projects/${project?._id}`, ProjectData)
+            if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
-                toast.success("Project Added Successfull...", { id: toastId })
+                toast.success("Project Updated Successfull...", { id: toastId })
                 reset()
                 setOpen(!open)
             }
         } catch (error) {
-            toast.error('Failed to Add Project. Please try again.')
+            toast.error('Failed to Update Project. Please try again.')
         }
     }
     return (
@@ -189,6 +213,22 @@ const UpdateProject = () => {
                                     {
                                         error && <p className="text-red-500">{error.message}</p>
                                     }
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="technologies"
+                            render={({ field, fieldState: { error } }) => (
+                                <FormItem>
+                                    <FormLabel>Used Technologies</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Enter technologies (comma separated)" {...field} value={field.value || ''} />
+                                    </FormControl>
+                                    {
+                                        error && <p className="text-red-500">{error.message}</p>
+                                    }
+                                    <p className="text-sm text-blue-500">Aler: Enter technologies (comma separated)</p>
                                 </FormItem>
                             )}
                         />

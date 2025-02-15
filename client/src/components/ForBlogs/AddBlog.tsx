@@ -74,12 +74,12 @@ const AddBlog = () => {
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
-                toast.success("Product Added Successfull...", { id: toastId })
+                toast.success("Blog Added Successfull...", { id: toastId })
                 reset()
                 setOpen(!open)
             }
         } catch (error) {
-            toast.error('Failed to Add Product. Please try again.')
+            toast.error('Failed to Add Blog. Please try again.')
         }
     }
     return (
@@ -98,9 +98,9 @@ const AddBlog = () => {
                             name="title"
                             render={({ field, fieldState: { error } }) => (
                                 <FormItem>
-                                    <FormLabel>Product Title</FormLabel>
+                                    <FormLabel>Blog Title</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Product Title" {...field} value={field.value || ''} />
+                                        <Input placeholder="Blog Title" {...field} value={field.value || ''} />
                                     </FormControl>
                                     {
                                         error && <p className="text-red-500">{error.message}</p>

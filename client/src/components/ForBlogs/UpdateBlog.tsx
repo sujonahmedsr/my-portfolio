@@ -94,12 +94,12 @@ const UpdateBlog = ({ blog }: { blog: TBlog }) => {
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
-                toast.success("Product Added Successfull...", { id: toastId })
+                toast.success("Blog Added Successfull...", { id: toastId })
                 reset()
                 setOpen(!open)
             }
         } catch (error) {
-            toast.error('Failed to Add Product. Please try again.')
+            toast.error('Failed to Add Blog. Please try again.')
         }
     }
     return (
@@ -118,9 +118,9 @@ const UpdateBlog = ({ blog }: { blog: TBlog }) => {
                             name="title"
                             render={({ field, fieldState: { error } }) => (
                                 <FormItem>
-                                    <FormLabel>Product Title</FormLabel>
+                                    <FormLabel>Blog Title</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Product Title" {...field} value={field.value || ''} />
+                                        <Input placeholder="Blog Title" {...field} value={field.value || ''} />
                                     </FormControl>
                                     {
                                         error && <p className="text-red-500">{error.message}</p>
@@ -133,13 +133,13 @@ const UpdateBlog = ({ blog }: { blog: TBlog }) => {
                             name="image"
                             render={({ field, fieldState: { error } }) => (
                                 <FormItem>
-                                    <FormLabel>Product Image</FormLabel>
+                                    <FormLabel>Blog Image</FormLabel>
                                     <FormControl>
                                         <div className="flex flex-col gap-2">
                                             {/* Show Image Preview if Available */}
                                             {field.value && typeof field.value === "string" && (
                                                 <Image src={field.value} width={50} height={50}
-                                                    alt="Product" className="w-32 h-32 object-cover rounded-lg border" />
+                                                    alt="Blog" className="w-32 h-32 object-cover rounded-lg border" />
                                             )}
 
                                             {/* File Input for Image Upload */}

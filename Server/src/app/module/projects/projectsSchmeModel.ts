@@ -24,7 +24,7 @@ const projectsSchema = new Schema<projectsInterface>({
         required: [true, 'liveLink field is required']
     },
     technologies: {
-        type: [String],
+        type: String,
         required: [true, 'technologies field is required']
     },
 

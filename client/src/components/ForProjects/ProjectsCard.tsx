@@ -4,17 +4,18 @@ import Image from 'next/image';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 
 export type TProject = {
-    id: string,
+    _id: string,
     title: string,
     image: string,
     liveLink: string,
     githubLink: string,
-    description: string
+    description: string,
+    technologies: string
 }
 
 const ProjectsCard = ({project}: {project: TProject}) => {
     return (
-        <Card key={project?.id} className="bg-white p-5 rounded shadow-lg hover:shadow-2xl transition-all dark:bg-gray-800">
+        <Card key={project?._id} className="bg-white p-5 rounded shadow-lg hover:shadow-2xl transition-all dark:bg-gray-800">
             <Image
                 src={project?.image}
                 alt={project?.title}
@@ -47,7 +48,7 @@ const ProjectsCard = ({project}: {project: TProject}) => {
 
                 <div className="text-center">
                     <a
-                        href={`/projects/${project?.id}`}
+                        href={`/projects/${project?._id}`}
                         className="text-blue-600 font-medium hover:underline dark:text-blue-400 dark:hover:text-blue-500"
                     >
                         View Details

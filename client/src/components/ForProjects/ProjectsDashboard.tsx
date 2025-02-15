@@ -1,50 +1,15 @@
-"use client"
-
 import { Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import AddBlog from "./AddProject";
 import Image from "next/image";
 import UpdateBlog from "./UpdateProject";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import axios from "axios";
+import { TProject } from "./ProjectsCard";
 
-const projects = [
-  {
-    id: '1',
-    title: "Cycle Labs",
-    description: "A full-stack bicycle store application with authentication, payment integration, and product management.",
-    image: "https://img.freepik.com/premium-vector/project-management-marketing-analysis-development-online-successful-strategy-motivation_501813-2156.jpg",
-    liveLink: "#",
-    githubLink: "#",
-  },
-  {
-    id: '2',
-    title: "Coaching Center Management",
-    description: "A web app for managing student records, attendance, and online classes.",
-    image: "https://img.freepik.com/premium-vector/project-management-marketing-analysis-development-online-successful-strategy-motivation_501813-2156.jpg",
-    liveLink: "#",
-    githubLink: "#",
-  },
-  {
-    id: '3',
-    title: "Time Management App",
-    description: "A productivity tool to track and manage tasks efficiently.",
-    image: "https://img.freepik.com/premium-vector/project-management-marketing-analysis-development-online-successful-strategy-motivation_501813-2156.jpg",
-    liveLink: "#",
-    githubLink: "#",
-  },
-  {
-    id: '4',
-    title: "Time Management App",
-    description: "A productivity tool to track and manage tasks efficiently.",
-    image: "https://img.freepik.com/premium-vector/project-management-marketing-analysis-development-online-successful-strategy-motivation_501813-2156.jpg",
-    liveLink: "#",
-    githubLink: "#",
-  }
-];
-
-
-export default function ProjectsDashboard() {
-
+export default async function ProjectsDashboard() {
+  const res = await axios.get(`http://localhost:5000/api/projects`)
+  const projects = res?.data?.data?.result
   return (
     <div className="container mx-auto p-6">
       <div className="flex justify-between items-center mb-4">
@@ -62,14 +27,15 @@ export default function ProjectsDashboard() {
               <th className="border p-2">Live</th>
               <th className="border p-2">GitHub</th>
               <th className="border p-2">Description</th>
+              <th className="border p-2">Technologies</th>
               <th className="border p-2">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {projects.map((project) => (
-              <tr key={project.id} className="hover:bg-gray-100 hover:dark:bg-gray-800">
+            {projects.map((project: TProject) => (
+              <tr key={project._id} className="hover:bg-gray-100 hover:dark:bg-gray-800">
                 <td className="border p-2">
-                  <Image src={project.image} width={50} height={50} className="w-full h-full" alt={project.title} />
+                  <Image src={project.image} width={50} height={50} alt={project.title} />
                 </td>
                 <td className="border p-2">{project.title}</td>
                 <td className="border p-2"><a
@@ -90,11 +56,20 @@ export default function ProjectsDashboard() {
                   >
                     <FaGithub className="h-5 w-5 mr-2" /> GitHub
                   </a></td>
-                <td className="border p-2">{project.description}</td>
+                <td className="border p-2">{project?.description}</td>
+                <td className="border p-2">
+                  {project?.technologies
+                    ?.split(",") // Comma diye split kora
+                    ?.map((tech, i) => (
+                      <span key={i} className="px-2 py-1 bg-gray-200 rounded mr-2">
+                        {tech.trim()} {/* Extra space remove kora */}
+                      </span>
+                    ))}
+                </td>
 
 
                 <td className="border p-2 flex items-center mx-auto justify-center gap-2">
-                  <UpdateBlog />
+                  <UpdateBlog project={project} />
                   <Button variant={"outline"} className="text-red-600"><Trash2 size={18} /></Button>
                 </td>
               </tr>

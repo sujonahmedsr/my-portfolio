@@ -31,6 +31,7 @@ const formSchema = z.object({
     description: z.string({ required_error: "description is required." }),
     liveLink: z.string({ required_error: "liveLink is required." }),
     githubLink: z.string({ required_error: "githubLink is required." }),
+    technologies: z.string({ required_error: "technologies is required." }),
 });
 const AddProject = () => {
     const [open, setOpen] = useState(false)
@@ -67,22 +68,24 @@ const AddProject = () => {
             // cloudirnay img url 
             const imageUrl = response.data.secure_url
 
-            const blogData = {
+            const projectData = {
                 ...data,
                 image: imageUrl
             }
-            console.log(blogData);
+            console.log("from prject data",projectData);
             
-            const res = await axios.post(`http://localhost:5000/api/projects/create`,blogData)
-            if (res?.error) {
+            const res = await axios.post(`http://localhost:5000/api/projects/create`,projectData)
+            console.log(res, "from res");
+            
+            if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
-                toast.success("Product Added Successfull...", { id: toastId })
+                toast.success("project Added Successfull...", { id: toastId })
                 reset()
                 setOpen(!open)
             }
         } catch (error) {
-            toast.error('Failed to Add Product. Please try again.')
+            toast.error('Failed to Add project. Please try again.')
         }
     }
     return (
@@ -180,6 +183,22 @@ const AddProject = () => {
                                     {
                                         error && <p className="text-red-500">{error.message}</p>
                                     }
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="technologies"
+                            render={({ field, fieldState: { error } }) => (
+                                <FormItem>
+                                    <FormLabel>Used Technologies</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Enter technologies (comma separated)" {...field} value={field.value || ''} />
+                                    </FormControl>
+                                    {
+                                        error && <p className="text-red-500">{error.message}</p>
+                                    }
+                                    <p className="text-sm text-blue-500">Aler: Enter technologies (comma separated)</p>
                                 </FormItem>
                             )}
                         />
