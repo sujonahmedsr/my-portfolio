@@ -2,30 +2,13 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import BlogsCard from "../ForBlogs/BlogsCard";
+import BlogsCard, { TBlog } from "../ForBlogs/BlogsCard";
+import axios from "axios";
 
-const blogs = [
-  {
-    id: "1",
-    title: "Mastering React Hooks",
-    description: "Learn how to use React hooks effectively in your projects.",
-    image: "https://talent500.com/blog/wp-content/uploads/sites/42/2024/05/react-must-be-in-scope-when-using-jsx-scaled-1.jpg",
-  },
-  {
-    id: "2",
-    title: "Understanding JavaScript Closures",
-    description: "A deep dive into one of the most powerful JavaScript concepts.",
-    image: "https://talent500.com/blog/wp-content/uploads/sites/42/2024/05/react-must-be-in-scope-when-using-jsx-scaled-1.jpg",
-  },
-  {
-    id: "3",
-    title: "The Future of Web Development",
-    description: "Explore the latest trends and technologies shaping the web.",
-    image: "https://talent500.com/blog/wp-content/uploads/sites/42/2024/05/react-must-be-in-scope-when-using-jsx-scaled-1.jpg",
-  }
-];
 
-const BlogSection = () => {
+const BlogSection = async () => {
+  const res = await axios.get(`http://localhost:5000/api/blogs`)
+  const blogs = res?.data?.data?.result
   return (
     <div className="bg-gray-100 text-center py-10 dark:bg-gray-900 dark:text-white">
       {/* Educational Qualification */}
@@ -53,7 +36,7 @@ const BlogSection = () => {
 
       <h2 className="text-2xl font-bold text-center mb-6">Latest Blogs</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 container mx-auto">
-        {blogs.map((blog, index) => (
+        {blogs.slice(0, 3).map((blog: TBlog, index: number) => (
           <BlogsCard key={index} blog={blog} />
         ))}
       </div>
