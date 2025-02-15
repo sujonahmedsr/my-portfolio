@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 
 const BlogDetails = async ({ params }: { params: any }) => {
     const { id } = await params
-    
+
     const res = await axios.get(`http://localhost:5000/api/blogs/${id}`)
     console.log(res);
-    
+
     const blog = res?.data?.data
 
     // Find the blog based on the id
@@ -35,7 +35,10 @@ const BlogDetails = async ({ params }: { params: any }) => {
                 />
                 <h1 className="text-sm mt-4">Created At: {new Date(blog.createdAt).toLocaleDateString()}</h1>
                 <h1 className="text-3xl font-semibold mt-4">{blog.title}</h1>
-                <p className="text-gray-600 text-sm mb-4 dark:text-gray-300">{blog.description}</p>
+                <p
+                    className="text-gray-600 text-sm mb-4 dark:text-gray-300"
+                    dangerouslySetInnerHTML={{ __html: blog.description.replace(/\n/g, "<br/>") }}
+                ></p>
 
                 <div className="mt-6 text-center">
                     <Link href="/blogs">

@@ -15,7 +15,7 @@ const BlogsCard = ({blog}: {blog: TBlog}) => {
             <Image src={blog.image} alt={blog.title} width={500} height={500} className="w-full h-64 object-cover" />
             <div className="p-4">
               <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
-              <p className="text-gray-600 text-sm mb-4 dark:text-gray-300">{blog.description?.slice(0,250)}</p>
+              <p className="text-gray-600 text-sm mb-4 dark:text-gray-300">{blog.description?.slice(0,200)}...</p>
               <div className="text-center">
                 <Link href={`/blogs/${blog?._id}`} className="text-blue-600 hover:text-blue-700 font-medium dark:text-blue-400 dark:hover:text-blue-500 mx-auto">
                   Read More →
