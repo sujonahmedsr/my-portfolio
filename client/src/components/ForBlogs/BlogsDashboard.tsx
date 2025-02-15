@@ -3,6 +3,7 @@ import Image from "next/image";
 import UpdateBlog from "./UpdateBlog";
 import axios from "axios";
 import { TBlog } from "./BlogsCard";
+import Link from "next/link";
 
 export default async function BlogsDashboard() {
   const res = await axios.get(`http://localhost:5000/api/blogs`)
@@ -33,11 +34,14 @@ export default async function BlogsDashboard() {
                   <Image src={blog.image} width={50} height={50} alt={blog.title} />
                 </td>
                 <td className="border p-2">{blog.title}</td>
-                <td className="border p-2">{blog.description}</td>
-                
-                
-                <td className="border p-2 flex items-center mx-auto justify-center gap-2">
-                  <UpdateBlog blog={blog}/>
+                <td className="border p-2">
+                  {blog.description?.slice(0, 80)}......
+                  <Link className="text-blue-500 hover:underline" href={`/blogs/${blog?._id}`}>See More</Link>
+                </td>
+
+
+                <td className="p-2 flex items-center mx-auto justify-center gap-2">
+                  <UpdateBlog blog={blog} />
                 </td>
               </tr>
             ))}

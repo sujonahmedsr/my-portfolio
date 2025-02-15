@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import axios from 'axios';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,16 +11,11 @@ export const metadata: Metadata = {
 
 const BlogDetails = async ({ params }: { params: any }) => {
     const { id } = await params
-    console.log(id);
-
-    const blog = {
-        id: '1',
-        title: "Cycle Labs",
-        description: "A full-stack bicycle store application with authentication, payment integration, and product management.",
-        image: "https://img.freepik.com/premium-vector/project-management-marketing-analysis-development-online-successful-strategy-motivation_501813-2156.jpg",
-        liveLink: "#",
-        githubLink: "#",
-    }
+    
+    const res = await axios.get(`http://localhost:5000/api/blogs/${id}`)
+    console.log(res);
+    
+    const blog = res?.data?.data
 
     // Find the blog based on the id
 
@@ -39,9 +35,6 @@ const BlogDetails = async ({ params }: { params: any }) => {
                 />
                 <h1 className="text-3xl font-semibold mt-4">{blog.title}</h1>
                 <p className="text-gray-600 text-sm mb-4 dark:text-gray-300">{blog.description}</p>
-                <div className="text-gray-800 dark:text-gray-200">
-                    <p>{blog.description}</p>
-                </div>
 
                 <div className="mt-6 text-center">
                     <Link href="/blogs">

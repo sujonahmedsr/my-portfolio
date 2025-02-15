@@ -5,6 +5,7 @@ import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import axios from "axios";
 import { TProject } from "./ProjectsCard";
 import profile from "@/assets/profile.jpg"
+import Link from "next/link";
 
 export default async function ProjectsDashboard() {
   const res = await axios.get(`http://localhost:5000/api/projects`)
@@ -55,7 +56,9 @@ export default async function ProjectsDashboard() {
                   >
                     <FaGithub className="h-5 w-5 mr-2" /> GitHub
                   </a></td>
-                <td className="border p-2">{project?.description}</td>
+                <td className="border p-2">
+                  {project?.description?.slice(0,80)}.....<Link href={`/projects/${project?._id}`}>See More</Link>
+                </td>
                 <td className="border p-2">
                   {project?.technologies
                     ?.split(",") // Comma diye split kora
@@ -67,7 +70,7 @@ export default async function ProjectsDashboard() {
                 </td>
 
 
-                <td className="border p-2 flex items-center mx-auto justify-center gap-2">
+                <td className="p-2 flex items-center mx-auto justify-center gap-2">
                   <UpdateBlog project={project} />
                 </td>
               </tr>
