@@ -58,14 +58,14 @@ const ProjectDetailsPage = async ({ params }: { params: any }) => {
                     dangerouslySetInnerHTML={{ __html: project.description.replace(/\n/g, "<br/>") }}
                 >
                 </p>
-                <h1><span className='text-lg font-semibold'>Technologies</span>: {project?.technologies
+                <div><span className='text-lg font-semibold'>Technologies</span>: {project?.technologies
                     ?.split(",") // Comma diye split kora
                     ?.map((tech: string, i: number) => (
-                        <span key={i} className="px-2 py-1 bg-gray-200 rounded mr-2">
+                        <p key={i} className="px-2 py-1 bg-blue-200 rounded m-2 gap-2 inline-block">
                             {tech.trim()} {/* Extra space remove kora */}
-                        </span>
+                        </p>
                     ))}
-                </h1>
+                </div>
                 <div className="mt-6 text-center">
                     <Link href="/projects">
                         <p className="text-blue-600 hover:text-blue-700 font-medium dark:text-blue-400 dark:hover:text-blue-500">
