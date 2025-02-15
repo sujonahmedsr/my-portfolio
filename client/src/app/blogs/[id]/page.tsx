@@ -13,7 +13,6 @@ const BlogDetails = async ({ params }: { params: any }) => {
     const { id } = await params
 
     const res = await axios.get(`http://localhost:5000/api/blogs/${id}`)
-    console.log(res);
 
     const blog = res?.data?.data
 
@@ -31,7 +30,7 @@ const BlogDetails = async ({ params }: { params: any }) => {
                     alt={blog.title}
                     width={700}
                     height={500}
-                    className="w-full h-72object-cover rounded-lg"
+                    className="w-full h-72 rounded-lg"
                 />
                 <h1 className="text-sm mt-4">Created At: {new Date(blog.createdAt).toLocaleDateString()}</h1>
                 <h1 className="text-3xl font-semibold mt-4">{blog.title}</h1>

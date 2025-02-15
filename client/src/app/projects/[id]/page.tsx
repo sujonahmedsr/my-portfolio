@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import axios from 'axios';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 
@@ -11,25 +13,11 @@ export const metadata: Metadata = {
 
 const ProjectDetailsPage = async ({ params }: { params: any }) => {
     const { id } = await params
-    console.log(id);
 
+    const res = await axios.get(`http://localhost:5000/api/projects/${id}`)
 
-    const project = {
-        id: "4",
-        title: "Time Management App",
-        description: "A productivity tool to track and manage tasks efficiently.",
-        image: "https://img.freepik.com/premium-vector/project-management-marketing-analysis-development-online-successful-strategy-motivation_501813-2156.jpg",
-        liveLink: "#",
-        githubLink: "#",
-        technologies: [
-            'Next.js',
-            'React.js',
-            'Tailwind CSS',
-            'TypeScript',
-            'MongoDB',
-            'Express'
-        ]
-    }  // Find the project by its ID
+    const project = res?.data?.data
+
 
     if (!project) {
         return <div>Project not found</div>;
@@ -42,7 +30,7 @@ const ProjectDetailsPage = async ({ params }: { params: any }) => {
                     src={project.image}
                     alt={project.title}
                     width={700} height={500}
-                    className="w-full h-[60vh] object-cover rounded-lg mb-6"
+                    className="w-full h-72 rounded-lg mb-6"
                 />
                 <div className="flex items-center justify-between py-4">
                     {/* Live Demo Link with Icon */}
@@ -64,11 +52,29 @@ const ProjectDetailsPage = async ({ params }: { params: any }) => {
                         <FaGithub className="h-5 w-5 mr-2" /> GitHub
                     </a>
                 </div>
-                <p className="text-gray-600 text-lg mb-6 dark:text-gray-300">{project.description}</p>
-                <h1><span className='text-lg font-semibold'>Technologies</span>: {
-                    project?.technologies?.map((item, index) => <span key={index}>{item}, </span>)
-                }</h1>
+                <p className="text-gray-800 text-2xl font-bold mb-6 dark:text-gray-300">{project.title}</p>
+                <p
+                    className="text-gray-600 text-sm mb-4 dark:text-gray-300"
+                    dangerouslySetInnerHTML={{ __html: project.description.replace(/\n/g, "<br/>") }}
+                >
+                </p>
+                <h1><span className='text-lg font-semibold'>Technologies</span>: {project?.technologies
+                    ?.split(",") // Comma diye split kora
+                    ?.map((tech: string, i: number) => (
+                        <span key={i} className="px-2 py-1 bg-gray-200 rounded mr-2">
+                            {tech.trim()} {/* Extra space remove kora */}
+                        </span>
+                    ))}
+                </h1>
+                <div className="mt-6 text-center">
+                    <Link href="/projects">
+                        <p className="text-blue-600 hover:text-blue-700 font-medium dark:text-blue-400 dark:hover:text-blue-500">
+                            ← Back to Projects Page
+                        </p>
+                    </Link>
+                </div>
             </div>
+
         </section>
     );
 };

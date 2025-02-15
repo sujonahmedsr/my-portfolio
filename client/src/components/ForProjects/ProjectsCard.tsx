@@ -20,7 +20,7 @@ const ProjectsCard = ({project}: {project: TProject}) => {
                 src={project?.image}
                 alt={project?.title}
                 width={500} height={500}
-                className="rounded w-full h-64 object-cover"
+                className="rounded w-full h-64"
             />
             <div className="flex items-center justify-between py-4">
                 {/* Live Demo Link with Icon */}
@@ -44,7 +44,8 @@ const ProjectsCard = ({project}: {project: TProject}) => {
             </div>
             <div className="text-start">
                 <h3 className="text-xl font-semibold">{project?.title}</h3>
-                <p className="text-gray-600 text-sm my-2 dark:text-gray-300">{project?.description}</p>
+                <p className="text-gray-600 text-sm my-2 dark:text-gray-300">{project?.description.slice(0,120)}...</p>
+
 
                 <div className="text-center">
                     <a
