@@ -1,33 +1,24 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"; // Assuming shadcn card component path
-import Image from "next/image";
 import { Metadata } from 'next';
+import axios from "axios";
+
+type TMessage = {
+    _id: string,
+    fullName: string,
+    email: string,
+    subject: string,
+    message: string,
+    createdAt: string
+}
 
 export const metadata: Metadata = {
     title: "Dashboard | Messages",
     description: "Explore my portfolio of projects, showcasing my expertise in web development. From front-end designs to full-stack applications, see what I've built!",
   };
 
-const messages = [
-    {
-        id: 1,
-        userName: "John Doe",
-        email: "john.doe@example.com",
-        image: "https://randomuser.me/api/portraits/men/1.jpg", // Random image or user-specific image URL
-        description: "This is a sample message description. Lorem ipsum dolor sit amet.",
-        date: new Date(),
-    },
-    {
-        id: 2,
-        userName: "Jane Smith",
-        email: "jane.smith@example.com",
-        image: "https://randomuser.me/api/portraits/women/1.jpg",
-        description: "Another message description. Curabitur lobortis enim neque, quis aliquet nulla vulputate eget.",
-        date: new Date(),
-    },
-    // Add 8 more message objects here
-];
-
-const MessagesPage = () => {
+const MessagesPage = async () => {
+    const res = await axios.get(`http://localhost:5000/api/message`)
+  const messages = res?.data?.data
     return (
         <div className="p-4">
             <div className="mb-5">
@@ -35,18 +26,18 @@ const MessagesPage = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 container mx-auto text-center">
                 {
-                    messages.map((message) => (
-                        <Card key={message.id} className="shadow-lg hover:shadow-2xl transition-all">
+                    messages.map((message: TMessage) => (
+                        <Card key={message._id} className="shadow-lg hover:shadow-2xl transition-all">
                             <CardHeader className="flex items-center space-x-4">
-                                <Image src={message.image} alt={message.userName} width={500} height={500} className="w-24 h-24 rounded-full" />
                                 <div>
-                                    <CardTitle className="text-lg font-semibold">{message.userName}</CardTitle>
-                                    <CardDescription className="text-sm text-gray-500">{message.email}</CardDescription>
+                                    <CardTitle className="text-xl font-semibold">{message.fullName}</CardTitle>
+                                    <CardDescription className="text-lg text-gray-500">{message.email}</CardDescription>
                                 </div>
                             </CardHeader>
-                            <CardContent>
-                                <p className="text-gray-700 dark:text-gray-300 mb-4">{message.description}</p>
-                                <span className="text-xs text-gray-400">{'message.date'}</span>
+                            <CardContent className="text-start">
+                                <p className="text-gray-800 text-lg font-semibold dark:text-gray-300 mb-4">{message.subject}</p>
+                                <p className="text-gray-700 dark:text-gray-300 mb-4">{message.message}</p>
+                                <span className="text-xs text-gray-400">{new Date(message.createdAt).toLocaleDateString()}</span>
                             </CardContent>
                         </Card>
                     ))}

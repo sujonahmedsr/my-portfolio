@@ -1,12 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaAddressCard } from "react-icons/fa6";
 import { Metadata } from "next";
+import ContactForm from "@/components/shared/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact With Me",
@@ -50,45 +47,8 @@ const ContactPage = () => {
             </div>
           </div>
 
-          {/* Right Side - Contact Form */}
-          <div className="mx-auto flex w-full flex-col gap-3 rounded-xl border  shadow-lg dark:bg-gray-800 dark:text-white p-6">
-
-            {/* Name Fields */}
-            <div className="flex gap-4">
-              <div className="w-full">
-                <Label htmlFor="firstname" className="">First Name</Label>
-                <Input type="text" id="firstname" placeholder="Enter First Name" className="bg-white/30  placeholder-white dark:bg-gray-700 dark:text-white" />
-              </div>
-              <div className="w-full">
-                <Label htmlFor="lastname" className="">Last Name</Label>
-                <Input type="text" id="lastname" placeholder="Enter Last Name" className="bg-white/30  placeholder-white dark:bg-gray-700 dark:text-white" />
-              </div>
-            </div>
-
-            {/* Email Field */}
-            <div className="w-full">
-              <Label htmlFor="email" className="">Email</Label>
-              <Input type="email" id="email" placeholder="Enter Email Address" className="bg-white/30 text-white placeholder-white dark:bg-gray-700 dark:text-white" />
-            </div>
-
-            {/* Subject Field */}
-            <div className="w-full">
-              <Label htmlFor="subject" className="">Subject</Label>
-              <Input type="text" id="subject" placeholder="Enter Subject" className="bg-white/30 text-white placeholder-white dark:bg-gray-700 dark:text-white" />
-            </div>
-
-            {/* Message Field */}
-            <div className="w-full">
-              <Label htmlFor="message" className="">Message</Label>
-              <Textarea placeholder="Type your message here..." id="message" className="bg-white/30 text-white placeholder-white dark:bg-gray-700 dark:text-white" />
-            </div>
-
-            {/* Send Button */}
-            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded dark:bg-blue-400 dark:hover:bg-blue-500">
-              Send Message
-            </Button>
-          </div>
-
+        {/* contact form  */}
+        <ContactForm />
         </div>
       </div>
     </section>

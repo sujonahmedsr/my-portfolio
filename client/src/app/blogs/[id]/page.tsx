@@ -25,14 +25,15 @@ const BlogDetails = async ({ params }: { params: any }) => {
 
     return (
         <section className='bg-gray-100 py-10 px-4 dark:bg-gray-900 dark:text-white'>
-            <div className="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg dark:bg-gray-800 border">
+            <div className="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg dark:bg-gray-800 border space-y-5">
                 <Image
                     src={blog.image}
                     alt={blog.title}
                     width={700}
                     height={500}
-                    className="w-full h-[60vh] object-cover rounded-lg"
+                    className="w-full h-72object-cover rounded-lg"
                 />
+                <h1 className="text-sm mt-4">Created At: {new Date(blog.createdAt).toLocaleDateString()}</h1>
                 <h1 className="text-3xl font-semibold mt-4">{blog.title}</h1>
                 <p className="text-gray-600 text-sm mb-4 dark:text-gray-300">{blog.description}</p>
 

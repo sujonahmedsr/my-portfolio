@@ -1,5 +1,6 @@
 export type TMessage = {
-    name: string,
+    fullName: string,
     email: string,
+    subject: string,
     message: string
 }
