@@ -4,5 +4,6 @@ export interface projectsInterface {
     image: string,
     description: string,
     technologies: string,
-    githubLink: string
+    githubLink: string,
+    liveLink: string,
 }

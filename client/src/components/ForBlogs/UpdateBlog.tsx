@@ -1,3 +1,4 @@
+"use client"
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
@@ -21,21 +22,30 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import axios from "axios"
 import Image from "next/image";
 import { Pencil } from "lucide-react";
+import { TProject } from "../ForProjects/ProjectsCard";
+import { TBlog } from "./BlogsCard"
 const formSchema = z.object({
     title: z.string({ required_error: "title is required." }).optional(),
     image: z.string().optional(),
     description: z.string({ required_error: "description is required." }).optional(),
 });
-const UpdateBlog = () => {
+const UpdateBlog = ({ blog }: { blog: TBlog }) => {
+    console.log(blog);
+
     const addBlog = {}
     const [open, setOpen] = useState(false)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        defaultValues: {
+            title: "",
+            image: "",
+            description: ""
+        }
     })
 
     // image upload to coudinary start 
@@ -48,28 +58,39 @@ const UpdateBlog = () => {
 
     const { reset } = form
 
+    useEffect(() => {
+        reset({
+            title: blog?.title || "",
+            image: blog?.image || "",
+            description: blog?.description || ""
+        });
+    }, [blog, reset]);
+
+
+
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Loading...")
         try {
-            if (!image) return toast.error("Please select an image first!");
+            let imageUrl = data?.image;
+            if (image) {
+                const formData = new FormData();
+                formData.append("file", image);
+                formData.append("upload_preset", "cycle_labs"); // Replace with your Cloudinary preset
 
-            const formData = new FormData();
-            formData.append("file", image);
-            formData.append("upload_preset", "cycle_labs"); // Replace with your Cloudinary preset
+                const response = await axios.post(
+                    "https://api.cloudinary.com/v1_1/dvjeaplel/image/upload", // Replace with your Cloudinary cloud name
+                    formData
+                );
 
-            const response = await axios.post(
-                "https://api.cloudinary.com/v1_1/dvjeaplel/image/upload", // Replace with your Cloudinary cloud name
-                formData
-            );
-
-            // cloudirnay img url 
-            const imageUrl = response.data.secure_url
+                // cloudirnay img url 
+                imageUrl = response.data.secure_url
+            }
 
             const blogData = {
                 ...data,
                 image: imageUrl
             }
-            const res = await addBlog(blogData)
+            const res = await axios.patch(`http://localhost:5000/api/blogs/${blog?._id}`, blogData)
             if (res?.error) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {

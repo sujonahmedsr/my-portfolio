@@ -1,42 +1,15 @@
-"use client"
-
 import { Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import AddBlog from "./AddBlog";
-import { TBlog } from "./BlogsCard";
 import Image from "next/image";
 import UpdateBlog from "./UpdateBlog";
+import axios from "axios";
+import { TBlog } from "./BlogsCard";
 
-const blogs: TBlog[] = [
-  {
-    id: "1",
-    title: "Mastering React Hooks",
-    description: "Learn how to use React hooks effectively in your projects.",
-    image: "https://talent500.com/blog/wp-content/uploads/sites/42/2024/05/react-must-be-in-scope-when-using-jsx-scaled-1.jpg",
-  },
-  {
-    id: "2",
-    title: "Understanding JavaScript Closures",
-    description: "A deep dive into one of the most powerful JavaScript concepts.",
-    image: "https://talent500.com/blog/wp-content/uploads/sites/42/2024/05/react-must-be-in-scope-when-using-jsx-scaled-1.jpg",
-  },
-  {
-    id: "3",
-    title: "The Future of Web Development",
-    description: "Explore the latest trends and technologies shaping the web.",
-    image: "https://talent500.com/blog/wp-content/uploads/sites/42/2024/05/react-must-be-in-scope-when-using-jsx-scaled-1.jpg",
-  },
-  {
-    id: "4",
-    title: "The Future of Web Development",
-    description: "Explore the latest trends and technologies shaping the web.",
-    image: "https://talent500.com/blog/wp-content/uploads/sites/42/2024/05/react-must-be-in-scope-when-using-jsx-scaled-1.jpg",
-  }
-];
-
-
-export default function BlogsDashboard() {
-
+export default async function BlogsDashboard() {
+  const res = await axios.get(`http://localhost:5000/api/blogs`)
+  const blogs = res?.data?.data?.result
+  
   return (
     <div className="container mx-auto p-6">
       <div className="flex justify-between items-center mb-4">
@@ -56,17 +29,17 @@ export default function BlogsDashboard() {
             </tr>
           </thead>
           <tbody>
-            {blogs.map((project) => (
-              <tr key={project.id} className="hover:bg-gray-100 hover:dark:bg-gray-800">
+            {blogs.map((blog: TBlog) => (
+              <tr key={blog._id} className="hover:bg-gray-100 hover:dark:bg-gray-800">
                 <td className="border p-2">
-                  <Image src={project.image} width={50} height={50} className="w-full h-full" alt={project.title} />
+                  <Image src={blog.image} width={50} height={50} alt={blog.title} />
                 </td>
-                <td className="border p-2">{project.title}</td>
-                <td className="border p-2">{project.description}</td>
+                <td className="border p-2">{blog.title}</td>
+                <td className="border p-2">{blog.description}</td>
                 
                 
                 <td className="border p-2 flex items-center mx-auto justify-center gap-2">
-                  <UpdateBlog />
+                  <UpdateBlog blog={blog}/>
                   <Button variant={"outline"}  className="text-red-600"><Trash2 size={18} /></Button>
                 </td>
               </tr>

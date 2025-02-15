@@ -1,3 +1,4 @@
+"use client"
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
@@ -32,7 +33,6 @@ const formSchema = z.object({
     githubLink: z.string({ required_error: "githubLink is required." }),
 });
 const AddProject = () => {
-    const addBlog = {}
     const [open, setOpen] = useState(false)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -50,6 +50,8 @@ const AddProject = () => {
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Loading...")
+        console.log("project data",data);
+        
         try {
             if (!image) return toast.error("Please select an image first!");
 
@@ -69,7 +71,9 @@ const AddProject = () => {
                 ...data,
                 image: imageUrl
             }
-            const res = await addBlog(blogData)
+            console.log(blogData);
+            
+            const res = await axios.post(`http://localhost:5000/api/projects/create`,blogData)
             if (res?.error) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {

@@ -1,3 +1,4 @@
+"use client"
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
@@ -67,7 +68,9 @@ const AddBlog = () => {
                 ...data,
                 image: imageUrl
             }
-            const res = await addBlog(blogData)
+            const res = await axios.post(`http://localhost:5000/api/blogs/create`,blogData)
+            console.log("blog create",res);
+            
             if (res?.error) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
