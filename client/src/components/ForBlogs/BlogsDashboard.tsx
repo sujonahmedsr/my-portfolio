@@ -1,13 +1,14 @@
 import AddBlog from "./AddBlog";
 import Image from "next/image";
 import UpdateBlog from "./UpdateBlog";
-import axios from "axios";
 import { TBlog } from "./BlogsCard";
 import Link from "next/link";
 
 export default async function BlogsDashboard() {
-  const res = await axios.get(`http://localhost:5000/api/blogs`)
-  const blogs = res?.data?.data?.result
+  const res = await fetch(`http://localhost:5000/api/blogs`, {next: { tags: ["blogs"] }})
+  const blogsRes = await res.json()
+  const blogs = blogsRes?.data?.result
+  
 
   return (
     <div className="container mx-auto p-6">
@@ -28,7 +29,7 @@ export default async function BlogsDashboard() {
             </tr>
           </thead>
           <tbody>
-            {blogs.map((blog: TBlog) => (
+            {blogs?.map((blog: TBlog) => (
               <tr key={blog._id} className="hover:bg-gray-100 hover:dark:bg-gray-800">
                 <td className="border p-2">
                   <Image src={blog.image} width={50} height={50} alt={blog.title} />

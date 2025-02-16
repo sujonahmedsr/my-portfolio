@@ -196,7 +196,7 @@ const AddProject = () => {
                                     {
                                         error && <p className="text-red-500">{error.message}</p>
                                     }
-                                    <p className="text-sm text-blue-500">Aler: Enter technologies (comma separated)</p>
+                                    <p className="text-sm text-blue-500">Alert: Enter technologies (comma separated)</p>
                                 </FormItem>
                             )}
                         />

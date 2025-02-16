@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const ProjectsPage = async () => {
-    const res = await axios.get(`http://localhost:5000/api/projects`)
+    const res = await fetch(`http://localhost:5000/api/projects`, {next: { tags: ["projects"] }})
     const projects = res?.data?.data?.result
     return (
         <section className="bg-gray-100 text-center py-10 dark:bg-gray-900 dark:text-white">

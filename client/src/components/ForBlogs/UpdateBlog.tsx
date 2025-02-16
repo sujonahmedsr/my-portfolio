@@ -29,6 +29,7 @@ import Image from "next/image";
 import { Pencil, Trash2 } from "lucide-react";
 import { TProject } from "../ForProjects/ProjectsCard";
 import { TBlog } from "./BlogsCard"
+import { revalidateBlogs } from "@/actions/revalidateData"
 const formSchema = z.object({
     title: z.string({ required_error: "title is required." }).optional(),
     image: z.string().optional(),
@@ -94,6 +95,7 @@ const UpdateBlog = ({ blog }: { blog: TBlog }) => {
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
+                await revalidateBlogs()
                 toast.success("Blog Added Successfull...", { id: toastId })
                 reset()
                 setOpen(!open)
@@ -105,6 +107,7 @@ const UpdateBlog = ({ blog }: { blog: TBlog }) => {
 
     const handleDelete = async (id: string) => {
         await axios.delete(`http://localhost:5000/api/blogs/${id}`)
+        await revalidateBlogs()
     }
     return (
         <Dialog open={open} onOpenChange={setOpen}>

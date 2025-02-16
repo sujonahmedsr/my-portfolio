@@ -30,7 +30,7 @@ const ProjectDetailsPage = async ({ params }: { params: any }) => {
                     src={project.image}
                     alt={project.title}
                     width={700} height={500}
-                    className="w-full h-72 rounded-lg mb-6"
+                    className="w-full h-full rounded-lg mb-6"
                 />
                 <div className="flex items-center justify-between py-4">
                     {/* Live Demo Link with Icon */}
@@ -61,7 +61,7 @@ const ProjectDetailsPage = async ({ params }: { params: any }) => {
                 <div><span className='text-lg font-semibold'>Technologies</span>: {project?.technologies
                     ?.split(",") // Comma diye split kora
                     ?.map((tech: string, i: number) => (
-                        <p key={i} className="px-2 py-1 bg-blue-200 rounded m-2 gap-2 inline-block">
+                        <p key={i} className="px-2 py-1 bg-blue-200 dark:bg-white dark:text-black rounded m-2 gap-2 inline-block">
                             {tech.trim()} {/* Extra space remove kora */}
                         </p>
                     ))}
