@@ -8,7 +8,7 @@ import axios from "axios";
 // ✅ API কলের জন্য আলাদা async function
 async function getProjects() {
   try {
-    const res = await axios.get(`${process.env.BACK_END}/projects`);
+    const res = await axios.get(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/projects`);
     return res.data?.data?.result || [];
   } catch (error) {
     console.error("Error fetching projects:", error);

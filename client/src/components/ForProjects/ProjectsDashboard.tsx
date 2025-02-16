@@ -8,7 +8,7 @@ import profile from "@/assets/profile.jpg"
 import Link from "next/link";
 
 const ProjectsDashboard = async () => {
-  const res = await axios.get(`${`http://localhost:5000/api`}/projects`)
+  const res = await axios.get(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/projects`)
   const projects = res?.data?.data?.result
   return (
     <div className="container mx-auto p-6">

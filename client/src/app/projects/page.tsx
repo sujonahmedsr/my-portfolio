@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 // ✅ API কলের জন্য আলাদা async function
 async function getProjects() {
     try {
-        const res = await fetch(`${`http://localhost:5000/api`}/projects`, {
+        const res = await fetch(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/projects`, {
             cache: "no-store", // ✅ Always fetch the latest data
             next: { tags: ["projects"] }, 
         });

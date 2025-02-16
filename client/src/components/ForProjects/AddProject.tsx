@@ -74,7 +74,7 @@ const AddProject = () => {
                 image: imageUrl
             }
             
-            const res = await axios.post(`${`http://localhost:5000/api`}/projects/create`,projectData)
+            const res = await axios.post(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/projects/create`,projectData)
             
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })

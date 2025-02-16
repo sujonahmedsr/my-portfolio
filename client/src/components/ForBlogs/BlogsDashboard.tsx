@@ -5,7 +5,7 @@ import { TBlog } from "./BlogsCard";
 import Link from "next/link";
 
 const BlogsDashboard = async () => {
-  const res = await fetch(`${`http://localhost:5000/api`}/blogs`, {next: { tags: ["blogs"] }})
+  const res = await fetch(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/blogs`, {next: { tags: ["blogs"] }})
   const blogsRes = await res.json()
   const blogs = blogsRes?.data?.result
   

@@ -7,7 +7,7 @@ import axios from "axios";
 
 async function getBlogs() {
   try {
-    const res = await axios.get(`${`http://localhost:5000/api`}/blogs`);
+    const res = await axios.get(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/blogs`);
     return res.data?.data?.result || [];
   } catch (error) {
     console.error("Error fetching blogs:", error);

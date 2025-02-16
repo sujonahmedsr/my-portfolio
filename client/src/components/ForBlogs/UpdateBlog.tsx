@@ -91,7 +91,7 @@ const UpdateBlog = ({ blog }: { blog: TBlog }) => {
                 ...data,
                 image: imageUrl
             }
-            const res = await axios.patch(`${`http://localhost:5000/api`}/blogs/${blog?._id}`, blogData)
+            const res = await axios.patch(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/blogs/${blog?._id}`, blogData)
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
@@ -106,7 +106,7 @@ const UpdateBlog = ({ blog }: { blog: TBlog }) => {
     }
 
     const handleDelete = async (id: string) => {
-        await axios.delete(`${`http://localhost:5000/api`}/blogs/${id}`)
+        await axios.delete(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/blogs/${id}`)
         await revalidateBlogs()
         await toast.success('Delete Okay.')
     }

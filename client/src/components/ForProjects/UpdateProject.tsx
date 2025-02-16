@@ -96,7 +96,7 @@ const UpdateProject = ({ project }: { project: TProject }) => {
                 ...data,
                 image: imageUrl
             }
-            const res = await axios.patch(`${`http://localhost:5000/api`}/projects/${project?._id}`, ProjectData)
+            const res = await axios.patch(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/projects/${project?._id}`, ProjectData)
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
@@ -110,7 +110,7 @@ const UpdateProject = ({ project }: { project: TProject }) => {
         }
     }
     const handleDelete = async (id: string) => {
-        await axios.delete(`${`http://localhost:5000/api`}/projects/${id}`)
+        await axios.delete(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/projects/${id}`)
         await revalidateProjects()
         await toast.success("Project Delete Successfull...")
     }

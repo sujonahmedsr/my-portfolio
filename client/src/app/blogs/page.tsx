@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 // ✅ API থেকে ডাটা ফেচ করার জন্য আলাদা ফাংশন
 async function getBlogs() {
   try {
-    const res = await fetch(`${`http://localhost:5000/api`}/blogs`, {
+    const res = await fetch(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/blogs`, {
       cache: "no-store", // ✅ Always fetch the latest data
       next: { tags: ["blogs"] },
     });

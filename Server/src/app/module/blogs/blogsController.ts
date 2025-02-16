@@ -17,6 +17,8 @@ const createConBlogs = asyncFunc(async (req, res) => {
 
 // get all bycles Blogs 
 const getConBlogs = asyncFunc(async (req, res) => {
+    console.log("hello gelloe");
+    
     const queryData = req?.query;
     const result = await BlogsServices.getBlogs(queryData)
     sendResponse(res, {

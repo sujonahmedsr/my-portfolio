@@ -37,7 +37,7 @@ export default function ContactForm() {
         const toastId = toast.loading("Loading...")
         console.log("Form Data:", data);
         try {
-            const res = await axios.post(`http://localhost:5000/api/message/create`, { ...data })
+            const res = await axios.post(`https://my-portfolio-backend-ebon.vercel.app/api/message/create`, { ...data })
 
             if ("error" in res) {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
