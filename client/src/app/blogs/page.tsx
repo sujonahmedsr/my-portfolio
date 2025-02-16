@@ -21,6 +21,7 @@ async function getBlogs() {
     }
 
     const data = await res.json();
+    console.log(data, "from blogs");
     return data?.data?.result || [];
   } catch (error) {
     console.error("Error fetching blogs:", error);
