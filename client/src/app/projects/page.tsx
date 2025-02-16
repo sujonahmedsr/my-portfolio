@@ -7,17 +7,38 @@ export const metadata: Metadata = {
     description: "Explore my portfolio of projects, showcasing my expertise in web development. From front-end designs to full-stack applications, see what I've built!",
 };
 
+// ✅ API কলের জন্য আলাদা async function
+async function getProjects() {
+    try {
+        const res = await fetch(`${`http://localhost:5000/api`}/projects`, {
+            cache: "no-store", // ✅ Always fetch the latest data
+            next: { tags: ["projects"] }, 
+        });
+        if (!res.ok) {
+            throw new Error("Failed to fetch projects");
+        }
+        const data = await res.json();
+        return data?.data?.result || [];
+    } catch (error) {
+        console.error("Error fetching projects:", error);
+        return [];
+    }
+}
+
 const ProjectsPage = async () => {
-    const res = await fetch(`${`http://localhost:5000/api`}/projects`, {next: { tags: ["projects"] }})
-    const projectRes = await res.json()
-    const projects = projectRes?.data?.result
+    const projects = await getProjects();
+
     return (
         <section className="bg-gray-100 text-center py-10 dark:bg-gray-900 dark:text-white">
             <h2 className="text-4xl font-bold text-center mb-6">My Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 container mx-auto">
-                {projects.map((project: TProject, index: number) => (
-                    <ProjectsCard key={index} project={project} />
-                ))}
+                {projects.length > 0 ? (
+                    projects.map((project: TProject, index: number) => (
+                        <ProjectsCard key={index} project={project} />
+                    ))
+                ) : (
+                    <p className="text-gray-500 text-lg">No Projects Found</p>
+                )}
             </div>
         </section>
     );
