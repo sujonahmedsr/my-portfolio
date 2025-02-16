@@ -2,14 +2,13 @@ import AddBlog from "./AddProject";
 import Image from "next/image";
 import UpdateBlog from "./UpdateProject";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
-import axios from "axios";
 import { TProject } from "./ProjectsCard";
 import profile from "@/assets/profile.jpg"
 import Link from "next/link";
+import { getProjects } from "@/actions/revalidateData";
 
 const ProjectsDashboard = async () => {
-  const res = await axios.get(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/projects`)
-  const projects = res?.data?.data?.result
+  const projects = await getProjects();
   return (
     <div className="container mx-auto p-6">
       <div className="flex justify-between items-center mb-4">

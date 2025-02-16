@@ -2,37 +2,15 @@ import React from "react";
 import { Metadata } from "next";
 import { TBlog } from "@/components/ForBlogs/BlogsCard";
 import BlogsCard from "@/components/ForBlogs/BlogsCard";
+import { getBlogs } from "@/actions/revalidateData";
 
 export const metadata: Metadata = {
   title: "My Blogs",
   description: "Explore my latest blogs on web development, programming, and tech trends. Stay updated with insights, tutorials, and coding tips!",
 };
 
-// ✅ API থেকে ডাটা ফেচ করার জন্য আলাদা ফাংশন
-async function getBlogs() {
-  try {
-    const res = await fetch(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/blogs`, {
-      cache: "no-store", // ✅ Always fetch the latest data
-      next: { tags: ["blogs"] },
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch blogs");
-    }
-
-    const data = await res.json();
-    console.log(data, "from blogs");
-    return data?.data?.result || [];
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    return [];
-  }
-}
-
 const BlogsPage = async () => {
   const blogs = await getBlogs();
-
-  console.log(blogs, "from blogs");
   
   return (
     <div className="bg-gray-100 py-10 dark:bg-gray-900 dark:text-white">

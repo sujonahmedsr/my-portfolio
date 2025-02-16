@@ -1,30 +1,12 @@
 import React from "react";
 import { Metadata } from "next";
 import ProjectsCard, { TProject } from "@/components/ForProjects/ProjectsCard";
+import { getProjects } from "@/actions/revalidateData";
 
 export const metadata: Metadata = {
     title: "My Projects",
     description: "Explore my portfolio of projects, showcasing my expertise in web development. From front-end designs to full-stack applications, see what I've built!",
 };
-
-// ✅ API কলের জন্য আলাদা async function
-async function getProjects() {
-    try {
-        const res = await fetch(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/projects`, {
-            cache: "no-store", // ✅ Always fetch the latest data
-            next: { tags: ["projects"] }, 
-        });
-        if (!res.ok) {
-            throw new Error("Failed to fetch projects");
-        }
-        const data = await res.json();
-        console.log(data, "from projects");
-        return data?.data?.result || [];
-    } catch (error) {
-        console.error("Error fetching projects:", error);
-        return [];
-    }
-}
 
 const ProjectsPage = async () => {
     const projects = await getProjects();

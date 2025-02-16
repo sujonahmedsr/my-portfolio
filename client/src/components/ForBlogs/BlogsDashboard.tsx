@@ -3,12 +3,10 @@ import Image from "next/image";
 import UpdateBlog from "./UpdateBlog";
 import { TBlog } from "./BlogsCard";
 import Link from "next/link";
+import { getBlogs } from "@/actions/revalidateData";
 
 const BlogsDashboard = async () => {
-  const res = await fetch(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/blogs`, {next: { tags: ["blogs"] }})
-  const blogsRes = await res.json()
-  const blogs = blogsRes?.data?.result
-  
+  const blogs = await getBlogs();
 
   return (
     <div className="container mx-auto p-6">

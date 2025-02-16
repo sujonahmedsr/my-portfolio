@@ -3,18 +3,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Card } from "@/components/ui/card";
 import ProjectsCard, { TProject } from "../ForProjects/ProjectsCard";
-import axios from "axios";
-
-// ✅ API কলের জন্য আলাদা async function
-async function getProjects() {
-  try {
-    const res = await axios.get(`${`https://my-portfolio-backend-ebon.vercel.app/api`}/projects`);
-    return res.data?.data?.result || [];
-  } catch (error) {
-    console.error("Error fetching projects:", error);
-    return [];
-  }
-}
+import { getProjects } from "@/actions/revalidateData";
 
 const Projects = async () => {
   const projects = await getProjects();
