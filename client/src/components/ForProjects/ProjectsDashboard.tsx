@@ -7,7 +7,7 @@ import { TProject } from "./ProjectsCard";
 import profile from "@/assets/profile.jpg"
 import Link from "next/link";
 
-export default async function ProjectsDashboard() {
+const ProjectsDashboard = async () => {
   const res = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/projects`)
   const projects = res?.data?.data?.result
   return (
@@ -82,3 +82,5 @@ export default async function ProjectsDashboard() {
     </div>
   );
 }
+
+export default ProjectsDashboard

@@ -4,7 +4,7 @@ import UpdateBlog from "./UpdateBlog";
 import { TBlog } from "./BlogsCard";
 import Link from "next/link";
 
-export default async function BlogsDashboard() {
+const BlogsDashboard = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACK_END}/blogs`, {next: { tags: ["blogs"] }})
   const blogsRes = await res.json()
   const blogs = blogsRes?.data?.result
@@ -52,3 +52,5 @@ export default async function BlogsDashboard() {
     </div>
   );
 }
+
+export default BlogsDashboard
