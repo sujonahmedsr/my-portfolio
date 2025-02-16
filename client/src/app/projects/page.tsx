@@ -28,6 +28,7 @@ async function getProjects() {
 const ProjectsPage = async () => {
     const projects = await getProjects();
 
+    console.log(projects, "from projects");
     return (
         <section className="bg-gray-100 text-center py-10 dark:bg-gray-900 dark:text-white">
             <h2 className="text-4xl font-bold text-center mb-6">My Projects</h2>

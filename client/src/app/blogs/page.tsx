@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 // ✅ API থেকে ডাটা ফেচ করার জন্য আলাদা ফাংশন
 async function getBlogs() {
   try {
-    const res = await fetch(`${process.env.BACK_END}/blogs`, {
+    const res = await fetch(`${`http://localhost:5000/api`}/blogs`, {
       cache: "no-store", // ✅ Always fetch the latest data
       next: { tags: ["blogs"] },
     });
@@ -31,6 +31,8 @@ async function getBlogs() {
 const BlogsPage = async () => {
   const blogs = await getBlogs();
 
+  console.log(blogs, "from blogs");
+  
   return (
     <div className="bg-gray-100 py-10 dark:bg-gray-900 dark:text-white">
       <h2 className="text-4xl font-bold text-center mb-6">Latest Blogs</h2>
