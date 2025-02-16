@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 const MessagesPage = async () => {
-    const res = await axios.get(`${process.env.BACK_END}/message`)
+    const res = await axios.get(`${`http://localhost:5000/api`}/message`)
     const messages = res?.data?.data
     return (
         <div className="p-4">

@@ -37,7 +37,7 @@ export default function ContactForm() {
         const toastId = toast.loading("Loading...")
         console.log("Form Data:", data);
         try {
-            const res = await axios.post(`http://localhost:5000/api/message/create`, { ...data })
+            const res = await axios.post(``http://localhost:5000/api`/message/create`, { ...data })
             console.log(res, "response");
 
             if ("error" in res) {
