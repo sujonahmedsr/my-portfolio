@@ -1,12 +1,31 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import BlogsCard, { TBlog } from "../ForBlogs/BlogsCard";
 import { getBlogs } from "@/actions/revalidateData";
 
-const BlogSection = async () => {
-  const blogs = await getBlogs();
+const BlogSection = () => {
+  const [blogs, setBlogs] = useState<TBlog[]>([]);
+
+  // Initialize AOS animations
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
+  // Fetch blogs asynchronously
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const data = await getBlogs();
+      setBlogs(data);
+    };
+
+    fetchBlogs();
+  }, []);
 
   return (
     <div className="bg-gray-100 text-center py-10 dark:bg-gray-900 dark:text-white">
@@ -14,9 +33,14 @@ const BlogSection = async () => {
       <div className="my-14 container mx-auto px-4">
         <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Educational Qualification</h3>
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-700 dark:text-gray-300">
-          <Card className="bg-white dark:bg-gray-800 p-4 rounded shadow hover:shadow-lg">
+          <Card
+            className="bg-white dark:bg-gray-800 p-4 rounded shadow hover:shadow-lg"
+            data-aos="fade-up"
+          >
             <CardContent className="space-y-2">
-              <h4 className="font-bold text-xl text-blue-600 dark:text-blue-400">Diploma in Computer Technology</h4>
+              <h4 className="font-bold text-xl text-blue-600 dark:text-blue-400">
+                Diploma in Computer Technology
+              </h4>
               <p className="text-lg font-semibold">Sirajganj Polytechnic Institute</p>
               <p className="text-base text-gray-500">Session: 2020-2021 (End: 2024)</p>
               <p className="text-sm text-gray-500">
@@ -25,7 +49,12 @@ const BlogSection = async () => {
               </p>
             </CardContent>
           </Card>
-          <Card className="bg-white dark:bg-gray-800 p-4 rounded shadow hover:shadow-lg">
+
+          <Card
+            className="bg-white dark:bg-gray-800 p-4 rounded shadow hover:shadow-lg"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             <CardContent className="space-y-2">
               <h4 className="font-bold text-xl text-blue-600 dark:text-blue-400">S.S.C Science</h4>
               <p className="text-lg font-semibold">Mallika Sanaullah Ansary High School</p>
@@ -40,17 +69,27 @@ const BlogSection = async () => {
         </div>
       </div>
 
-      <h2 className="text-2xl font-bold text-center mb-6">Latest Blogs</h2>
+      {/* Latest Blogs */}
+      <h2 className="text-2xl font-bold text-center mb-6" data-aos="fade-up">Latest Blogs</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 container mx-auto">
-        {blogs.length > 0 ? (
-          blogs.slice(0, 3).map((blog: TBlog, index: number) => <BlogsCard key={index} blog={blog} />)
+        {blogs?.length > 0 ? (
+          blogs?.slice(0, 3).map((blog: TBlog, index: number) => (
+            <div key={index} data-aos="fade-up" data-aos-delay={index * 200}>
+              <BlogsCard blog={blog}/>
+            </div>
+          ))
         ) : (
           <p className="text-gray-500">No blogs available</p>
         )}
       </div>
+
+      {/* View All Blogs Button */}
       <div className="flex justify-center mt-6">
         <Link href="/blogs">
-          <Button className="px-6 py-2 rounded text-lg bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 dark:text-white">
+          <Button
+            className="px-6 py-2 rounded text-lg bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 dark:text-white"
+            data-aos="fade-up"
+          >
             View All Blogs
           </Button>
         </Link>
