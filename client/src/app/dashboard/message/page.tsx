@@ -14,11 +14,11 @@ type TMessage = {
 export const metadata: Metadata = {
     title: "Dashboard | Messages",
     description: "Explore my portfolio of projects, showcasing my expertise in web development. From front-end designs to full-stack applications, see what I've built!",
-  };
+};
 
 const MessagesPage = async () => {
-    const res = await axios.get(`http://localhost:5000/api/message`)
-  const messages = res?.data?.data
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/message`)
+    const messages = res?.data?.data
     return (
         <div className="p-4">
             <div className="mb-5">
