@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from 'axios';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,9 +11,9 @@ export const metadata: Metadata = {
 const BlogDetails = async ({ params }: { params: any }) => {
     const { id } = await params
 
-    const res = await axios.get(`http://localhost:5000/api/blogs/${id}`)
-
-    const blog = res?.data?.data
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACK_END}/blogs/${id}`, { next: { tags: ["blogs"] } })
+    const blogsRes = await res.json()
+    const blog = blogsRes?.data
 
     // Find the blog based on the id
 

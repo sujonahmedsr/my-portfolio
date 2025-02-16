@@ -28,6 +28,7 @@ import axios from "axios"
 import Image from "next/image";
 import { Pencil, Trash2 } from "lucide-react";
 import { TProject } from "./ProjectsCard"
+import { revalidateProjects } from "@/actions/revalidateData"
 const formSchema = z.object({
     title: z.string({ required_error: "title is required." }).optional(),
     image: z.string().optional(),
@@ -95,10 +96,11 @@ const UpdateProject = ({ project }: { project: TProject }) => {
                 ...data,
                 image: imageUrl
             }
-            const res = await axios.patch(`http://localhost:5000/api/projects/${project?._id}`, ProjectData)
+            const res = await axios.patch(`${process.env.NEXT_PUBLIC_BACK_END}/projects/${project?._id}`, ProjectData)
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
+                await revalidateProjects()
                 toast.success("Project Updated Successfull...", { id: toastId })
                 reset()
                 setOpen(!open)
@@ -108,7 +110,9 @@ const UpdateProject = ({ project }: { project: TProject }) => {
         }
     }
     const handleDelete = async (id: string) => {
-        await axios.delete(`http://localhost:5000/api/projects/${id}`)
+        await axios.delete(`${process.env.NEXT_PUBLIC_BACK_END}/projects/${id}`)
+        await revalidateProjects()
+        await toast.success("Project Delete Successfull...")
     }
     return (
         <Dialog open={open} onOpenChange={setOpen}>

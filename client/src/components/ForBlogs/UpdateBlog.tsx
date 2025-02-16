@@ -91,7 +91,7 @@ const UpdateBlog = ({ blog }: { blog: TBlog }) => {
                 ...data,
                 image: imageUrl
             }
-            const res = await axios.patch(`http://localhost:5000/api/blogs/${blog?._id}`, blogData)
+            const res = await axios.patch(`${process.env.NEXT_PUBLIC_BACK_END}/blogs/${blog?._id}`, blogData)
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
@@ -106,8 +106,9 @@ const UpdateBlog = ({ blog }: { blog: TBlog }) => {
     }
 
     const handleDelete = async (id: string) => {
-        await axios.delete(`http://localhost:5000/api/blogs/${id}`)
+        await axios.delete(`${process.env.NEXT_PUBLIC_BACK_END}/blogs/${id}`)
         await revalidateBlogs()
+        await toast.success('Delete Okay.')
     }
     return (
         <Dialog open={open} onOpenChange={setOpen}>

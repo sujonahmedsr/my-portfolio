@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from 'axios';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,10 +13,9 @@ export const metadata: Metadata = {
 const ProjectDetailsPage = async ({ params }: { params: any }) => {
     const { id } = await params
 
-    const res = await axios.get(`http://localhost:5000/api/projects/${id}`)
-
-    const project = res?.data?.data
-
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACK_END}/projects/${id}`, {next: { tags: ["projects"] }})
+    const projectRes = await res.json()
+    const project = projectRes?.data
 
     if (!project) {
         return <div>Project not found</div>;

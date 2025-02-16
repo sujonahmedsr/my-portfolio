@@ -5,7 +5,7 @@ import { TBlog } from "./BlogsCard";
 import Link from "next/link";
 
 export default async function BlogsDashboard() {
-  const res = await fetch(`http://localhost:5000/api/blogs`, {next: { tags: ["blogs"] }})
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACK_END}/blogs`, {next: { tags: ["blogs"] }})
   const blogsRes = await res.json()
   const blogs = blogsRes?.data?.result
   

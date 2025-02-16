@@ -2,7 +2,6 @@ import React from "react";
 import { Metadata } from "next";
 import { TBlog } from "@/components/ForBlogs/BlogsCard";
 import BlogsCard from "@/components/ForBlogs/BlogsCard";
-import axios from "axios";
 
 export const metadata: Metadata = {
   title: "My Blogs",
@@ -10,8 +9,10 @@ export const metadata: Metadata = {
 };
 
 const BlogsPage = async () => {
-  const res = await axios.get(`http://localhost:5000/api/blogs`)
-  const blogs = res?.data?.data?.result
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACK_END}/blogs`, { next: { tags: ["blogs"] } })
+  const blogsRes = await res.json()
+  const blogs = blogsRes?.data?.result
+
   return (
     <div className="bg-gray-100 py-10 dark:bg-gray-900 dark:text-white">
       <h2 className="text-4xl font-bold text-center mb-6">Latest Blogs</h2>

@@ -25,6 +25,7 @@ import { Button } from "../ui/button";
 import { useState } from "react"
 import { toast } from "sonner"
 import axios from "axios"
+import { revalidateProjects } from "@/actions/revalidateData"
 const formSchema = z.object({
     title: z.string({ required_error: "title is required." }),
     image: z.string().optional(),
@@ -73,11 +74,12 @@ const AddProject = () => {
                 image: imageUrl
             }
             
-            const res = await axios.post(`http://localhost:5000/api/projects/create`,projectData)
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_BACK_END}/projects/create`,projectData)
             
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
+                await revalidateProjects()
                 toast.success("project Added Successfull...", { id: toastId })
                 reset()
                 setOpen(!open)

@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 const BlogSection = async () => {
-  const res = await axios.get(`http://localhost:5000/api/blogs`)
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/blogs`)
   const blogs = res?.data?.data?.result
   return (
     <div className="bg-gray-100 text-center py-10 dark:bg-gray-900 dark:text-white">

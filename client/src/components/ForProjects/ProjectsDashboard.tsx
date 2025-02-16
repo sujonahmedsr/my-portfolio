@@ -8,7 +8,7 @@ import profile from "@/assets/profile.jpg"
 import Link from "next/link";
 
 export default async function ProjectsDashboard() {
-  const res = await axios.get(`http://localhost:5000/api/projects`)
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/projects`)
   const projects = res?.data?.data?.result
   return (
     <div className="container mx-auto p-6">

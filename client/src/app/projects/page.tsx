@@ -1,7 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
 import ProjectsCard, { TProject } from "@/components/ForProjects/ProjectsCard";
-import axios from "axios";
 
 export const metadata: Metadata = {
     title: "My Projects",
@@ -9,8 +8,9 @@ export const metadata: Metadata = {
 };
 
 const ProjectsPage = async () => {
-    const res = await fetch(`http://localhost:5000/api/projects`, {next: { tags: ["projects"] }})
-    const projects = res?.data?.data?.result
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACK_END}/projects`, {next: { tags: ["projects"] }})
+    const projectRes = await res.json()
+    const projects = projectRes?.data?.result
     return (
         <section className="bg-gray-100 text-center py-10 dark:bg-gray-900 dark:text-white">
             <h2 className="text-4xl font-bold text-center mb-6">My Projects</h2>
