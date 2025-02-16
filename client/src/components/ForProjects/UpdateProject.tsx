@@ -240,7 +240,7 @@ const UpdateProject = ({ project }: { project: TProject }) => {
                                 </FormItem>
                             )}
                         />
-                        <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded">Add Project</Button>
+                        <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded dark:text-white">Update Project</Button>
                     </form>
                 </Form>
             </DialogContent>

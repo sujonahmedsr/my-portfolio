@@ -152,7 +152,7 @@ const AddBlog = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded">Add Blog</Button>
+                        <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded dark:text-white">Add Blog</Button>
                     </form>
                 </Form>
             </DialogContent>

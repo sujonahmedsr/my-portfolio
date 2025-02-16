@@ -202,7 +202,7 @@ const AddProject = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded">Add Project</Button>
+                        <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded dark:text-white">Add Project</Button>
                     </form>
                 </Form>
             </DialogContent>
