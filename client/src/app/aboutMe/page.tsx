@@ -36,14 +36,14 @@ export default function AboutMe() {
 
             {/* Call to Action */}
             <div className="mt-6 flex items-center md:justify-start justify-center gap-5">
-              <a href="/contact" className="inline-block px-6 py-2 bg-blue-600 text-white font-semibold rounded shadow hover:bg-blue-700 transition">
+              <a href="/resume.pdf" download={"Shofiqul Islam Resume (MERN)"} className="inline-block px-6 py-2 bg-blue-600 text-white font-semibold rounded shadow hover:bg-blue-700 transition">
                 Resume
               </a>
               {/* Social Media Links */}
-              <a href="#" className="text-3xl text-blue-600 hover:text-blue-700"><FaFacebook /></a>
+              <a href="https://www.facebook.com/sujonahmeds81" className="text-3xl text-blue-600 hover:text-blue-700"><FaFacebook /></a>
               <a href="#" className="text-3xl text-blue-700 hover:text-blue-800"><FaLinkedin /></a>
               <a href="#" className="text-3xl text-blue-400 hover:text-blue-500"><FaTwitter /></a>
-              <a href="#" className="text-3xl text-gray-800 hover:text-gray-900"><FaGithub /></a>
+              <a href="https://github.com/sujonahmedsr" className="text-3xl text-gray-800 hover:text-gray-900"><FaGithub /></a>
             </div>
           </div>
           <div className="relative w-72 h-72 rounded overflow-hidden border-4 border-blue-600 shadow-lg mx-auto transform rotate-6 hover:rotate-0 hover:shadow-xl transition-all duration-500">

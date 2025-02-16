@@ -14,8 +14,8 @@ const DashboardPage = () => {
         <h1 className="text-3xl font-bold mt-2">Shofiqul Islam Sujon</h1>
         <p className="text-gray-500">MERN Stack Developer | Full Stack Enthusiast</p>
         <div className="mt-4">
-          <a href="https://github.com/your-github" className="text-blue-500 mx-2">GitHub</a>
-          <a href="https://linkedin.com/in/your-profile" className="text-blue-500 mx-2">LinkedIn</a>
+          <a href="https://github.com/sujonahmedsr" className="text-blue-500 mx-2">GitHub</a>
+          <a href="https://www.facebook.com/sujonahmeds81" className="text-blue-500 mx-2">LinkedIn</a>
         </div>
       </div>
 

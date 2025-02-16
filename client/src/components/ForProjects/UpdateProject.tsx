@@ -96,7 +96,7 @@ const UpdateProject = ({ project }: { project: TProject }) => {
                 ...data,
                 image: imageUrl
             }
-            const res = await axios.patch(`${process.env.NEXT_PUBLIC_BACK_END}/projects/${project?._id}`, ProjectData)
+            const res = await axios.patch(`${process.env.BACK_END}/projects/${project?._id}`, ProjectData)
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })
             } else {
@@ -110,7 +110,7 @@ const UpdateProject = ({ project }: { project: TProject }) => {
         }
     }
     const handleDelete = async (id: string) => {
-        await axios.delete(`${process.env.NEXT_PUBLIC_BACK_END}/projects/${id}`)
+        await axios.delete(`${process.env.BACK_END}/projects/${id}`)
         await revalidateProjects()
         await toast.success("Project Delete Successfull...")
     }

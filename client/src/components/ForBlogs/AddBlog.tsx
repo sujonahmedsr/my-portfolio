@@ -70,7 +70,7 @@ const AddBlog = () => {
                 ...data,
                 image: imageUrl
             }
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BACK_END}/blogs/create`, blogData)
+            const res = await axios.post(`${process.env.BACK_END}/blogs/create`, blogData)
 
             if ("error" in res) {
                 toast.error((res?.error as any)?.error || "Something went wrong", { id: toastId })

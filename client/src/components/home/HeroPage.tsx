@@ -39,10 +39,10 @@ export default function HeroPage() {
               Resume
             </a>
             {/* Social Media Links */}
-            <a href="#" className="text-3xl text-blue-600 hover:text-blue-700"><FaFacebook /></a>
+            <a href="https://www.facebook.com/sujonahmeds81" className="text-3xl text-blue-600 hover:text-blue-700"><FaFacebook /></a>
             <a href="#" className="text-3xl text-blue-700 hover:text-blue-800"><FaLinkedin /></a>
             <a href="#" className="text-3xl text-blue-400 hover:text-blue-500"><FaTwitter /></a>
-            <a href="#" className="text-3xl text-gray-800 hover:text-gray-900"><FaGithub /></a>
+            <a href="https://github.com/sujonahmedsr" className="text-3xl text-gray-800 hover:text-gray-900"><FaGithub /></a>
           </div>
         </div>
 

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const ProjectDetailsPage = async ({ params }: { params: any }) => {
     const { id } = await params
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACK_END}/projects/${id}`, {next: { tags: ["projects"] }})
+    const res = await fetch(`${process.env.BACK_END}/projects/${id}`, {next: { tags: ["projects"] }})
     const projectRes = await res.json()
     const project = projectRes?.data
 

@@ -6,7 +6,7 @@ import ProjectsCard, { TProject } from "../ForProjects/ProjectsCard";
 import axios from "axios";
 
 const Projects = async () => {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/projects`)
+    const res = await axios.get(`${process.env.BACK_END}/projects`)
     const projects = res?.data?.data?.result
     return (
         <>
