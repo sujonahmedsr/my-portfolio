@@ -35,20 +35,23 @@ const About = () => {
         });
     }, []);
     return (
-        <section className="bg-gray-100 dark:bg-gray-900 py-16 px-6 md:px-12 lg:px-20 transition-all">
+        <section className="bg-gray-100 dark:bg-gray-900 py-16 transition-all">
             <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-between gap-8 mx-auto px-4">
+                <div className="md:grid flex flex-col-reverse  grid-cols-1 md:grid-cols-2 justify-between gap-8 mx-auto">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white" data-aos="fade-right" data-aos-delay="100">
-                            About Me
-                        </h2>
-                        <p className="mt-4 text-gray-700 dark:text-gray-300" data-aos="fade-up" data-aos-delay="400">
-                            Hello! I&apos;m <span className="font-semibold text-blue-600 dark:text-blue-400">Shofiqul Islam Sujon</span>, a passionate
-                            <span className="font-semibold text-blue-600 dark:text-blue-400"> Front-End Developer</span> with expertise in
-                            <span className="font-semibold text-blue-600 dark:text-blue-400"> HTML, CSS, JavaScript, Tailwind CSS, and React.js</span>.
-                            Currently, I&apos;m learning new <span className="font-semibold">Technologies</span>, aiming to become a
-                            <span className="font-semibold text-blue-600 dark:text-blue-400"> Full-Stack Web Developer</span>.
-                        </p>
+                        <div className="mt-4 text-gray-700 dark:text-gray-300" data-aos="fade-up" data-aos-delay="400">
+                            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
+                                Hi, I&apos;m <br />
+                                <p className="text-blue-600 dark:text-blue-400 mt-5">Shofiqul Islam Sujon</p>
+                            </h1>
+                            <p className="mt-5">
+                                a passionate
+                                <span className="font-semibold text-blue-600 dark:text-blue-400"> Front-End Developer</span> with expertise in
+                                <span className="font-semibold text-blue-600 dark:text-blue-400"> HTML, CSS, JavaScript, Tailwind CSS, and React.js</span>.
+                                Currently, I&apos;m learning new <span className="font-semibold">Technologies</span>, aiming to become a
+                                <span className="font-semibold text-blue-600 dark:text-blue-400"> Full-Stack Web Developer</span>.
+                            </p>
+                        </div>
 
                         <p className="mt-4 text-gray-700 dark:text-gray-300" data-aos="fade-up" data-aos-delay="600">
                             I enjoy problem-solving through code and exploring new technologies. My goal is to become a proficient full-stack developer.
@@ -89,8 +92,10 @@ const About = () => {
                         </div>
                     </div>
 
-                    <div className="relative w-80 h-80 rounded overflow-hidden border-4 border-blue-600 shadow-lg mx-auto transform rotate-6 hover:rotate-0 hover:shadow-xl transition-all duration-500" data-aos="fade-left" data-aos-delay="500">
-                        <Image src={profile} alt="Shofiqul Islam Sujon" layout="fill" objectFit="cover" />
+                    <div className="flex flex-col items-center" data-aos="fade-left">
+                        <div className="relative w-72 h-72 rounded overflow-hidden border-4 border-blue-600 shadow-lg mx-auto transform rotate-6 hover:rotate-0 hover:shadow-xl transition-all duration-500" data-aos="fade-left" data-aos-delay="500">
+                            <Image src={profile} alt="Shofiqul Islam Sujon" layout="fill" objectFit="cover" />
+                        </div>
                     </div>
                 </div>
 
@@ -134,7 +139,7 @@ const About = () => {
                 </div>
 
                 {/* "What I Do" Section */}
-                <div className="my-14 container mx-auto px-4">
+                <div className="my-14 container mx-auto">
                     <h3 className="text-2xl font-semibold text-gray-900 dark:text-white" data-aos="fade-up">
                         What I Do
                     </h3>
