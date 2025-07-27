@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import { getProjects } from "@/actions/revalidateData";
 
 const Projects = () => {
   const [projects, setProjects] = useState<TProject[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // ✅ Add loading state
 
   // Initialize AOS
   useEffect(() => {
@@ -20,8 +21,15 @@ const Projects = () => {
   // Fetch projects asynchronously
   useEffect(() => {
     const fetchProjects = async () => {
-      const data = await getProjects();
-      setProjects(data);
+      setLoading(true); // Start loading
+      try {
+        const data = await getProjects();
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false); // End loading
+      }
     };
 
     fetchProjects();
@@ -34,33 +42,52 @@ const Projects = () => {
           What I Do
         </h3>
         <div className="mt-4 text-gray-700 dark:text-gray-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="flex flex-col gap-2 text-center p-10 dark:bg-gray-800 rounded hover:shadow-xl" data-aos="fade-up" data-aos-delay="200">
+          <Card
+            className="flex flex-col gap-2 text-center p-10 dark:bg-gray-800 rounded hover:shadow-xl"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             <span className="text-4xl">💻</span>
             <span className="font-semibold">Web Development</span> – Building modern and responsive web applications.
           </Card>
-          <Card className="flex flex-col gap-2 text-center p-10 dark:bg-gray-800 rounded hover:shadow-xl" data-aos="fade-up" data-aos-delay="400">
+          <Card
+            className="flex flex-col gap-2 text-center p-10 dark:bg-gray-800 rounded hover:shadow-xl"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
             <span className="text-4xl">🎨</span>
             <span className="font-semibold">UI/UX Enthusiast</span> – Focused on creating seamless user experiences.
           </Card>
-          <Card className="flex flex-col gap-2 text-center p-10 dark:bg-gray-800 rounded hover:shadow-xl" data-aos="fade-up" data-aos-delay="600">
+          <Card
+            className="flex flex-col gap-2 text-center p-10 dark:bg-gray-800 rounded hover:shadow-xl"
+            data-aos="fade-up"
+            data-aos-delay="600"
+          >
             <span className="text-4xl">🚀</span>
             <span className="font-semibold">Continuous Learning</span> – Exploring new technologies like Redux, Next.js, Node.js, and SQL Backend.
           </Card>
         </div>
       </div>
 
+      {/* My Projects Section */}
       <h2 className="text-2xl font-bold text-center my-6" data-aos="fade-up">My Projects</h2>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 container mx-auto">
-        {projects?.length > 0 ? (
-          projects?.slice(0, 3).map((project: TProject, index: number) => (
+        {loading ? (
+          <div className="flex justify-center items-center col-span-full py-10">
+            <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+          </div>
+        ) : projects?.length > 0 ? (
+          projects.slice(0, 3).map((project: TProject, index: number) => (
             <div key={index} data-aos="fade-up" data-aos-delay={index * 200}>
               <ProjectsCard project={project} />
             </div>
           ))
         ) : (
-          <p className="text-gray-500" data-aos="fade-up">No projects available</p>
+          <p className="text-gray-500 col-span-full text-center" data-aos="fade-up">No projects available</p>
         )}
       </div>
+
       <div className="flex justify-center mt-6" data-aos="fade-up">
         <Link href="/projects">
           <Button className="px-6 py-2 rounded text-lg bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 dark:text-white">

@@ -35,7 +35,7 @@ export default function ContactForm() {
     // Handle form submission
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         const toastId = toast.loading("Loading...")
-        console.log("Form Data:", data);
+        // console.log("Form Data:", data);
         try {
             const res = await axios.post(`https://my-portfolio-backend-ebon.vercel.app/api/message/create`, { ...data })
 

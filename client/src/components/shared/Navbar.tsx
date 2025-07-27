@@ -68,7 +68,7 @@ export default function Navbar({ session }: { session: Tsession }) {
               ))}
 
               {/* login and user profile  */}
-              <div>
+              {/* <div>
                 {
                   session?.user ?
                     <ProfileDropdown session={session} />
@@ -98,7 +98,7 @@ export default function Navbar({ session }: { session: Tsession }) {
                     </Dialog>
 
                 }
-              </div>
+              </div> */}
 
               {/* dark mode  */}
               <ModeToggle />

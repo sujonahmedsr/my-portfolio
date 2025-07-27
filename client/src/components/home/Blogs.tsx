@@ -11,6 +11,7 @@ import { getBlogs } from "@/actions/revalidateData";
 
 const BlogSection = () => {
   const [blogs, setBlogs] = useState<TBlog[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // ✅ Add loading state
 
   // Initialize AOS animations
   useEffect(() => {
@@ -20,8 +21,15 @@ const BlogSection = () => {
   // Fetch blogs asynchronously
   useEffect(() => {
     const fetchBlogs = async () => {
-      const data = await getBlogs();
-      setBlogs(data);
+      setLoading(true); // Start loading
+      try {
+        const data = await getBlogs();
+        setBlogs(data);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false); // End loading
+      }
     };
 
     fetchBlogs();
@@ -71,15 +79,20 @@ const BlogSection = () => {
 
       {/* Latest Blogs */}
       <h2 className="text-2xl font-bold text-center mb-6" data-aos="fade-up">Latest Blogs</h2>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 container mx-auto">
-        {blogs?.length > 0 ? (
-          blogs?.slice(0, 3).map((blog: TBlog, index: number) => (
+        {loading ? (
+          <div className="flex justify-center items-center col-span-full py-10">
+  <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+</div>
+        ) : blogs?.length > 0 ? (
+          blogs.slice(0, 3).map((blog: TBlog, index: number) => (
             <div key={index} data-aos="fade-up" data-aos-delay={index * 200}>
-              <BlogsCard blog={blog}/>
+              <BlogsCard blog={blog} />
             </div>
           ))
         ) : (
-          <p className="text-gray-500">No blogs available</p>
+          <p className="text-gray-500 col-span-full text-center">No blogs available</p>
         )}
       </div>
 
